@@ -37,7 +37,6 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
     private GoogleSignInClient mGoogleSignInClient;
     private TextView mStatusTextView;
     private TextView mDetailTextView;
-    public static String email;
     public static String name;
 
 
@@ -213,5 +212,10 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        finish();
+    }
 }
 

@@ -6,5 +6,6 @@ public class user {
     public String name;
     public String email;
     public String user_type;
+    public float score;
 
 }
