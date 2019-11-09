@@ -17,10 +17,10 @@ public class Profile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        user user = new student(name, email, id);
+        user usuario = new student(name, email, id);
 
         mUserType = findViewById(R.id.usertypw);
-        mUserType.setText(user.name);
+        mUserType.setText(usuario.name);
 
     }
 }
