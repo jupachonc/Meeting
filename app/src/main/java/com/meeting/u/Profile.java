@@ -15,6 +15,5 @@ public class Profile extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
 
         mUserType = findViewById(R.id.usertypw);
-        mUserType.setText(usert);
     }
 }
