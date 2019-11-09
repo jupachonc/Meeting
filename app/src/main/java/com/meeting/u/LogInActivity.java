@@ -39,7 +39,6 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
     private TextView mDetailTextView;
     public static String email;
     public static String name;
-    public static user userv;
 
 
 
@@ -70,9 +69,7 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
         mAuth = FirebaseAuth.getInstance();
     }
 
-    public static user getUser(){
-        return userv;
-    }
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -95,8 +92,6 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            email = user.getEmail();
-                            name = user.getDisplayName();
                             updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
@@ -110,6 +105,7 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
                     }
                 });
     }
+
 
 
     @Override
@@ -140,7 +136,6 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
     private void signIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
-        userv =  new student(email);
     }
 
     public void signOut() {
@@ -186,6 +181,8 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
         if (user != null) {
             mStatusTextView.setText(getString(R.string.google_status_fmt, user.getEmail()));
             mDetailTextView.setText(getString(R.string.firebase_status_fmt, user.getUid()));
+            Profile.name = user.getDisplayName();
+            Profile.email = user.getEmail();
 
             findViewById(R.id.signInButton).setVisibility(View.GONE);
             findViewById(R.id.signOutAndDisconnect).setVisibility(View.VISIBLE);
