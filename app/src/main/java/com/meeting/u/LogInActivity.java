@@ -183,6 +183,7 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
             mDetailTextView.setText(getString(R.string.firebase_status_fmt, user.getUid()));
             Profile.name = user.getDisplayName();
             Profile.email = user.getEmail();
+            Profile.id = user.getUid();
 
             findViewById(R.id.signInButton).setVisibility(View.GONE);
             findViewById(R.id.signOutAndDisconnect).setVisibility(View.VISIBLE);
