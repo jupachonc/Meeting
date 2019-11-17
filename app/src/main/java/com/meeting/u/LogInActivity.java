@@ -66,6 +66,8 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
 
 
         mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        updateUI(currentUser);
     }
 
 
@@ -73,6 +75,20 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
     protected void onStart() {
         super.onStart();
 
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        updateUI(currentUser);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        updateUI(currentUser);
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         updateUI(currentUser);
     }
@@ -133,6 +149,8 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
 
 
     private void signIn() {
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        updateUI(currentUser);
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
@@ -178,12 +196,9 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
 
     private void updateUI(FirebaseUser user) {
         if (user != null) {
-            mStatusTextView.setText(getString(R.string.google_status_fmt, user.getEmail()));
-            mDetailTextView.setText(getString(R.string.firebase_status_fmt, user.getUid()));
             Profile.name = user.getDisplayName();
             Profile.email = user.getEmail();
             Profile.id = user.getUid();
-
             findViewById(R.id.signInButton).setVisibility(View.GONE);
             findViewById(R.id.signOutAndDisconnect).setVisibility(View.VISIBLE);
             Intent goToMain = new Intent(this, MainActivity.class);
@@ -215,7 +230,21 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onStop() {
         super.onStop();
-        finish();
+        signOut();
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        signOut();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        updateUI(currentUser);
     }
 }
 
