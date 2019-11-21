@@ -12,6 +12,37 @@ public class Profile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
+        updateU();
+
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+
+        updateU();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        updateU();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        updateU();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        finish();
+    }
+
+    protected void updateU(){
 
         TextView mUserType = findViewById(R.id.usertypw);
         mUserType.setText(LogInActivity.usuario.name);
@@ -20,13 +51,6 @@ public class Profile extends AppCompatActivity {
         TextView mScore = findViewById(R.id.score);
         mScore.setText(String.valueOf(LogInActivity.usuario.score));
 
-    }
-
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        finish();
     }
 
 }

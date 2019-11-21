@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "744429645799-h59trl7ou0cq2l9oc5gpq6257mpid3me.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.meeting.u",
+            "certificate_hash": "2d42908cc0311cc12d59cfb661c591ce3705c742"
+          }
+        },
+        {
+          "client_id": "744429645799-kja081g6ssi3q4rqhnmp63g0bskcssak.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.meeting.u",
+            "certificate_hash": "f34937fa85115a89d8e33f118acffd9a747b0c0d"
+          }
+        },
+        {
           "client_id": "744429645799-8se02n52ffk9bpsof9r7fnj5f6t4sbod.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
