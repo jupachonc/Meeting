@@ -37,7 +37,7 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
     private GoogleSignInClient mGoogleSignInClient;
     private TextView mStatusTextView;
     private TextView mDetailTextView;
-    public static String name;
+    public static user usuario;
 
 
 
@@ -196,9 +196,7 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
 
     private void updateUI(FirebaseUser user) {
         if (user != null) {
-            Profile.name = user.getDisplayName();
-            Profile.email = user.getEmail();
-            Profile.id = user.getUid();
+            usuario = new student(user.getDisplayName(), user.getEmail(), user.getUid());
             findViewById(R.id.signInButton).setVisibility(View.GONE);
             findViewById(R.id.signOutAndDisconnect).setVisibility(View.VISIBLE);
             Intent goToMain = new Intent(this, MainActivity.class);

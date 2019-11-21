@@ -7,23 +7,18 @@ import android.widget.TextView;
 
 public class Profile extends AppCompatActivity {
 
-    public static String email;
-    public static String name;
-    public static String id;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        user usuario = new student(name, email, id);
 
         TextView mUserType = findViewById(R.id.usertypw);
-        mUserType.setText(usuario.name);
+        mUserType.setText(LogInActivity.usuario.name);
         TextView mId = findViewById(R.id.id);
-        mId.setText("ID: "+ usuario.id);
+        mId.setText("ID: "+ LogInActivity.usuario.id);
         TextView mScore = findViewById(R.id.score);
-        mScore.setText(String.valueOf(usuario.score));
+        mScore.setText(String.valueOf(LogInActivity.usuario.score));
 
     }
 
