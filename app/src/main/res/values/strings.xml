@@ -93,4 +93,11 @@
 
     <string name="LogInUN">Accede con tu cuenta UN</string>
     <string name="MeetingUTittle">Meeting UN</string>
+
+    //New Activity Strings
+    <string name="Create_new_activity">Crea una Nueva Actividad</string>
+    <string name="Type_activity">Tipo de Actividad</string>
+    <string name="description">Ingrese una descripción de la actividad</string>
+    <string name="add_description">Agrega una descripción</string>
+    <string name="place">Lugar</string>
 </resources>
