@@ -43,7 +43,7 @@ public class ChatActivityView extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.chatactivity_view);
+        setContentView(R.layout.activity_chat_view);
 
         vistaChat = (RecyclerView) findViewById(R.id.vistaChat);
         escribir = (EditText) findViewById(R.id.escribir);
