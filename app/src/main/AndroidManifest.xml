@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".newActivityActivity"></activity>
         <activity android:name=".Profile" />
-        <activity android:name=".ActivityView" />
+        <activity android:name=".ChatActivityView" />
         <activity android:name=".LogInActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
