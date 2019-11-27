@@ -56,6 +56,7 @@
         android:layout_marginBottom="16dp"
         android:background="@color/cardview_light_background"
         android:hint="Escribe un mensaje"
+        android:inputType="textCapSentences"
         android:paddingLeft="48dp"
         android:text=""
         android:textColor="@color/black_1"
