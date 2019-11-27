@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Intent goToNewActivity = new Intent(this, newActivityActivity.class);
             startActivity(goToNewActivity);
         }else if(i == R.id.activities){
-            Intent goToActivities = new Intent(this, ActivityView.class);
+            Intent goToActivities = new Intent(this, ChatActivityView.class);
             startActivity(goToActivities);
         }else if(i == R.id.profile){
             Intent goToProfile = new Intent(this, Profile.class);

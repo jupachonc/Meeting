@@ -25,7 +25,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-public class ActivityView extends AppCompatActivity {
+public class ChatActivityView extends AppCompatActivity {
     private RecyclerView vistaChat;
     private EditText escribir;
     private ImageButton boton;
@@ -43,7 +43,7 @@ public class ActivityView extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view);
+        setContentView(R.layout.chatactivity_view);
 
         vistaChat = (RecyclerView) findViewById(R.id.vistaChat);
         escribir = (EditText) findViewById(R.id.escribir);
