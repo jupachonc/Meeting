@@ -2,16 +2,19 @@ package com.meeting.u;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.TextView;
 
-public class Profile extends AppCompatActivity {
+public class Profile extends AppCompatActivity implements OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-
+        findViewById(R.id.Profile).setOnClickListener(this);
         updateU();
 
     }
@@ -53,4 +56,14 @@ public class Profile extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onClick(View v) {
+        int i = v.getId();
+        if(i == R.id.Profile){
+
+            Intent goToMain = new Intent(this, LogInActivity.class);
+            startActivity(goToMain);
+        }
+
+    }
 }
