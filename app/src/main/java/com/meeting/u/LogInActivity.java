@@ -89,8 +89,7 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onRestart() {
         super.onRestart();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        updateUI(currentUser);
+        signOut();
     }
 
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
@@ -134,8 +133,6 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
         try {
             GoogleSignInAccount account = task.getResult(ApiException.class);
             firebaseAuthWithGoogle(account);
-            Intent goToMain = new Intent(this, MainActivity.class);
-            startActivity(goToMain);
         } catch (ApiException e) {
             // Google Sign In failed, update UI appropriately}
             Log.w(TAG, "Google sign in failed", e);
@@ -197,10 +194,11 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
     private void updateUI(FirebaseUser user) {
         if (user != null) {
             usuario = new student(user.getDisplayName(), user.getEmail(), user.getUid());
-            findViewById(R.id.signInButton).setVisibility(View.GONE);
-            findViewById(R.id.signOutAndDisconnect).setVisibility(View.VISIBLE);
             Intent goToMain = new Intent(this, MainActivity.class);
             startActivity(goToMain);
+            findViewById(R.id.signInButton).setVisibility(View.GONE);
+            findViewById(R.id.signOutAndDisconnect).setVisibility(View.VISIBLE);
+
         }else{
             mStatusTextView.setText(R.string.signed_out);
             mDetailTextView.setText(null);
