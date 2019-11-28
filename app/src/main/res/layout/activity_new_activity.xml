@@ -65,15 +65,17 @@
 
     <EditText
         android:id="@+id/description"
-        android:layout_width="360dp"
+        android:layout_width="375dp"
         android:layout_height="86dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="320dp"
+        android:layout_marginEnd="10dp"
         android:ems="10"
         android:gravity="start|top"
         android:hint="@string/description"
         android:inputType="textAutoCorrect|textMultiLine|textCapSentences"
-        android:textColor="@color/grey_300"
-        android:textColorHint="@color/grey_100"
+        android:textColor="@color/grey_100"
+        android:textColorHint="@color/grey_300"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.313"
         app:layout_constraintStart_toStartOf="parent"
@@ -83,7 +85,8 @@
         android:id="@+id/descrition_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="12dp"
         android:fontFamily="sans-serif-smallcaps"
         android:text="@string/add_description"
         android:textColor="#FFFFFF"
@@ -91,7 +94,7 @@
         android:textSize="22sp"
         app:layout_constraintBottom_toTopOf="@+id/description"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.095"
+        app:layout_constraintHorizontal_bias="0.032"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
@@ -102,7 +105,7 @@
         android:ems="10"
         android:hint="ej. Plaza Ché"
         android:inputType="textPersonName|textCapSentences"
-        android:textColor="@color/grey_300"
+        android:textColor="@color/grey_100"
         android:textColorHint="@color/grey_300"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.313"
@@ -149,5 +152,98 @@
         android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@+id/inicio"
         app:layout_constraintTop_toBottomOf="@+id/place" />
+
+    <ImageView
+        android:id="@+id/academia"
+        android:layout_width="90sp"
+        android:layout_height="90sp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="152dp"
+        android:clickable="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/academia" />
+
+    <ImageView
+        android:id="@+id/deportiva"
+        android:layout_width="90sp"
+        android:layout_height="90sp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="152dp"
+        android:clickable="true"
+        app:layout_constraintEnd_toStartOf="@+id/ocio"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/academia"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/deportiva" />
+
+    <ImageView
+        android:id="@+id/ocio"
+        android:layout_width="90sp"
+        android:layout_height="90sp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="152dp"
+        android:clickable="true"
+        app:layout_constraintEnd_toStartOf="@+id/otro"
+        app:layout_constraintStart_toEndOf="@+id/deportiva"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ocio" />
+
+    <ImageView
+        android:id="@+id/otro"
+        android:layout_width="90sp"
+        android:layout_height="90sp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="152dp"
+        android:layout_marginEnd="16dp"
+        android:clickable="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ocio"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/otra" />
+
+    <ImageView
+        android:id="@+id/check_academia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="84dp"
+        android:layout_marginTop="152dp"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/checkbox_on_background" />
+
+    <ImageView
+        android:id="@+id/check_deportiva"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="152dp"
+        android:visibility="invisible"
+        app:layout_constraintStart_toEndOf="@+id/check_academia"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/checkbox_on_background" />
+
+    <ImageView
+        android:id="@+id/check_ocio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="76dp"
+        android:layout_marginTop="152dp"
+        android:visibility="invisible"
+        app:layout_constraintStart_toEndOf="@+id/check_deportiva"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/checkbox_on_background" />
+
+    <ImageView
+        android:id="@+id/check_otro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="76dp"
+        android:layout_marginTop="152dp"
+        android:visibility="invisible"
+        app:layout_constraintStart_toEndOf="@+id/check_ocio"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/checkbox_on_background" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
