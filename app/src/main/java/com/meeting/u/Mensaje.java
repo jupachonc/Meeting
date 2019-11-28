@@ -6,21 +6,18 @@ public class Mensaje {
     private String nombre;
     private String mensaje;
     private String urlFoto;
+    private String type_mensaje;
 
     public Mensaje() {
     }
 
-    public Mensaje(String hora, String nombre, String mensaje) {
-        this.hora = hora;
-        this.nombre = nombre;
-        this.mensaje = mensaje;
-    }
-
-    public Mensaje(String hora, String nombre, String mensaje, String urlFoto) {
+    public Mensaje(String hora, String nombre, String mensaje, String urlFoto, String type_mensaje) {
+        //public Mensaje(String nombre, String mensaje, String urlFoto, String type_mensaje) {
         this.hora = hora;
         this.nombre = nombre;
         this.mensaje = mensaje;
         this.urlFoto = urlFoto;
+        this.type_mensaje = type_mensaje;
     }
 
     public String getHora() {
@@ -53,5 +50,13 @@ public class Mensaje {
 
     public void setUrlFoto(String urlFoto) {
         this.urlFoto = urlFoto;
+    }
+
+    public String getType_mensaje() {
+        return type_mensaje;
+    }
+
+    public void setType_mensaje(String type_mensaje) {
+        this.type_mensaje = type_mensaje;
     }
 }

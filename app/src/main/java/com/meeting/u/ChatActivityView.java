@@ -13,23 +13,30 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GetTokenResult;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageMetadata;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.Objects;
 
 public class ChatActivityView extends AppCompatActivity {
     private RecyclerView vistaChat;
@@ -67,16 +74,15 @@ public class ChatActivityView extends AppCompatActivity {
         vistaChat.setLayoutManager(l);
         vistaChat.setAdapter(adapter);
 
-        //Obtención de hora actual
 
-        final DateFormat dateFormat = new SimpleDateFormat("HH:mm");
+        final DateFormat dateFormat = new SimpleDateFormat("HH:mm a");
         final Date date = new Date();
 
         boton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
                 //adapter.addMessage(new Mensaje("00:00","Juan Camilo",escribir.getText().toString()));
-                databaseReference.push().setValue(new Mensaje(dateFormat.format(date),LogInActivity.usuario.name,escribir.getText().toString()));
+                databaseReference.push().setValue(new Mensaje(dateFormat.format(date),LogInActivity.usuario.name,escribir.getText().toString(),"","1"));
                 escribir.setText("");
             }
         });
@@ -127,7 +133,7 @@ public class ChatActivityView extends AppCompatActivity {
             }
         });
 
- //*/
+        //*/
     }
 
     private void setScrollbar(){
@@ -141,14 +147,61 @@ public class ChatActivityView extends AppCompatActivity {
             Uri u = data.getData();
             storageReference = storage.getReference("imgChat");//imágenes chat
             final StorageReference fotoReferencia = storageReference.child(u.getLastPathSegment());
-            fotoReferencia.putFile(u).addOnSuccessListener(this, new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            //
+            //StorageReference fotoReferencia = storageReference.child(u.getLastPathSegment());
+            //
+            final DateFormat dateFormat = new SimpleDateFormat("HH:mm a");
+            final Date date = new Date();
+            /*fotoReferencia.putFile(u).addOnSuccessListener(this, new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    Task<Uri> u = taskSnapshot.getMetadata().getReference().getDownloadUrl();
-                    Mensaje m = new Mensaje("00:00",LogInActivity.usuario.name,"Imagen",u.toString());
-                    databaseReference.push().setValue(m);
+                    FirebaseUser mUser = FirebaseAuth.getInstance().getCurrentUser();
+                    mUser.getIdToken(true)
+                            .addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
+                                public void onComplete(@NonNull Task<GetTokenResult> task) {
+                                    String idToken = "";
+                                    if (task.isSuccessful()) {
+                                        idToken = task.getResult().getToken();
+                                        // Send token to your backend via HTTPS
+                                        // ...
+                                    } else {
+                                        // Handle error -> task.getException();
+                                    }
+                                    Mensaje m = new Mensaje(dateFormat.format(date), LogInActivity.usuario.name, "", idToken, "2");
+                                    databaseReference.push().setValue(m);
+                                }
+                            });
+                }
+                });
+
+             */
+
+            fotoReferencia.putFile(u).addOnSuccessListener(this, new OnSuccessListener<UploadTask.TaskSnapshot>() {
+
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    //Task<Uri> u = taskSnapshot.getMetadata().getReference().getDownloadUrl();
+                    //Uri u = taskSnapshot.getDownloadUrl().getResult();
+                    //Uri u = taskSnapshot.getDownloadUrl();
+
+                    StorageMetadata snapshotMetadata = taskSnapshot.getMetadata();
+                    Task<Uri> downloadUrl = fotoReferencia.getDownloadUrl();
+                    downloadUrl.addOnSuccessListener(new OnSuccessListener<Uri>() {
+
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            String u = uri.toString();
+                            //StorageReference u = taskSnapshot.getMetadata().getReference();
+                            //Uri u = taskSnapshot.getAutenticationReference();
+                            //Task<Uri> u = Objects.requireNonNull(Objects.requireNonNull(taskSnapshot.getMetadata()).getReference()).getDownloadUrl();
+                            Mensaje m = new Mensaje(dateFormat.format(date),LogInActivity.usuario.name,"",u,"2");
+                            databaseReference.push().setValue(m);
+                        }
+
+                    });
                 }
             });
+
         }
     }
 }

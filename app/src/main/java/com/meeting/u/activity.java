@@ -33,9 +33,12 @@ public class activity {
     }
 
     protected void toDB(){
-        // Write a message to the database
+
+        // Registrar actividad en la Base de Datos
+
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference(tipo);
+        DatabaseReference myDB = database.getReference("Activities");
+        DatabaseReference myRef = myDB.child(tipo);
         DatabaseReference activity = myRef.push();
 
         activity.child("name").setValue(name);
@@ -48,11 +51,11 @@ public class activity {
 
         DatabaseReference actparticipantes = activity.child("participants");
 
-    for (int i = 0; i < participantes.length; i++){
+        for (int i = 0; i < participantes.length; i++){
 
-        actparticipantes.child(String.valueOf(i)).setValue(participantes[i]);
-    }
-    //myRef.push().child("participantes").child("uno").setValue(participantes[nparticipantes - (disponibles + 1)]);
+            actparticipantes.child(String.valueOf(i)).setValue(participantes[i]);
+        }
+
 
     }
 
