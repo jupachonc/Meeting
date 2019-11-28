@@ -89,7 +89,6 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onRestart() {
         super.onRestart();
-        signOut();
     }
 
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {

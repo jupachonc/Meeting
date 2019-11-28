@@ -8,7 +8,7 @@ import android.view.View;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
-    public static user userm = LogInActivity.usuario;
+    //public static user userm = LogInActivity.usuario;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

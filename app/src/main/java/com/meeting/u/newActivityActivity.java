@@ -3,6 +3,7 @@ package com.meeting.u;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.app.TimePickerDialog;
 import android.icu.util.Calendar;
 import android.os.Build;
@@ -26,10 +27,6 @@ public class newActivityActivity extends AppCompatActivity implements View.OnTou
     private ImageView mDeportiva;
     private ImageView mOcio;
     private ImageView mOtro;
-
-
-
-
 
 
     @Override
@@ -60,6 +57,7 @@ public class newActivityActivity extends AppCompatActivity implements View.OnTou
 
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public boolean onTouch(View v, MotionEvent event) {
@@ -75,11 +73,11 @@ public class newActivityActivity extends AppCompatActivity implements View.OnTou
                 public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                     if(minute < 10){
 
-                        mInicio.setText(hourOfDay + ":0" + minute);
+                        mInicio.setText(getString(hourOfDay, ":0", minute));
 
                     }else{
 
-                        mInicio.setText(hourOfDay + ":" + minute);
+                        mInicio.setText(getString(hourOfDay, ":", minute));
                     }
 
 
@@ -95,11 +93,11 @@ public class newActivityActivity extends AppCompatActivity implements View.OnTou
                 public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                     if(minute < 10){
 
-                        mFinal.setText(hourOfDay + ":0" + minute);
+                        mFinal.setText(getString(hourOfDay, ":0", minute));
 
                     }else{
 
-                        mFinal.setText(hourOfDay + ":" + minute);
+                        mFinal.setText(getString(hourOfDay, ":", minute));
                     }
 
 
@@ -147,7 +145,6 @@ public class newActivityActivity extends AppCompatActivity implements View.OnTou
             finish();
 
         }
-
     }
 
     @Override
@@ -159,7 +156,8 @@ public class newActivityActivity extends AppCompatActivity implements View.OnTou
 
         activity activity = new activity(type, mDescription.getText().toString(), mPlace.getText().toString(),
                 mInicio.getText().toString(), mFinal.getText().toString(),
-                Integer.parseInt(mParticipantes.getText().toString()), MainActivity.userm.name);
+                Integer.parseInt(mParticipantes.getText().toString()), LogInActivity.usuario.name);
+        activity.toDB();
     }
 
 
