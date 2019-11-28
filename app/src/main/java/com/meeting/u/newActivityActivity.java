@@ -12,20 +12,21 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 public class newActivityActivity extends AppCompatActivity implements View.OnTouchListener, View.OnClickListener{
 
     private String type;
+    private EditText mDescription;
+    private EditText mPlace;
+    private EditText mParticipantes;
     private EditText mInicio;
     private EditText mFinal;
     private ImageView mAcademia;
     private ImageView mDeportiva;
     private ImageView mOcio;
     private ImageView mOtro;
-    private ImageView cAcademia;
-    private ImageView cDeportiva;
-    private ImageView cOcio;
-    private ImageView cOtro;
+
 
 
 
@@ -38,18 +39,21 @@ public class newActivityActivity extends AppCompatActivity implements View.OnTou
 
         findViewById(R.id.inicio_time).setOnTouchListener(this);
         findViewById(R.id.final_time).setOnTouchListener(this);
+        findViewById(R.id.academia).setOnClickListener(this);
+        findViewById(R.id.deportiva).setOnClickListener(this);
+        findViewById(R.id.ocio).setOnClickListener(this);
+        findViewById(R.id.otro).setOnClickListener(this);
+        findViewById(R.id.crear).setOnClickListener(this);
 
+        mDescription = findViewById(R.id.description);
+        mPlace = findViewById(R.id.place);
+        mParticipantes = findViewById(R.id.nparticipantes);
         mInicio = findViewById(R.id.inicio_time);
         mFinal = findViewById(R.id.final_time);
         mAcademia = findViewById(R.id.academia);
         mDeportiva = findViewById(R.id.deportiva);
         mOcio = findViewById(R.id.ocio);
         mOtro = findViewById(R.id.otro);
-        cAcademia = findViewById(R.id.check_academia);
-        cDeportiva = findViewById(R.id.check_deportiva);
-        cOcio = findViewById(R.id.check_ocio);
-        cOtro = findViewById(R.id.check_otro);
-
 
 
 
@@ -112,11 +116,36 @@ public class newActivityActivity extends AppCompatActivity implements View.OnTou
         int i = v.getId();
         if(i == R.id.academia){
             type = "academia";
+            mAcademia.setImageResource(R.drawable.academia);
             mDeportiva.setImageResource(R.drawable.deportiva_50);
-            mOcio.setImageDrawable(getDrawable(R.drawable.ocio_50));
+            mOcio.setImageResource(R.drawable.ocio_50);
             mOtro.setImageResource(R.drawable.otra_50);
-            cDeportiva.setVisibility(View.VISIBLE);
-            //cAcademia
+
+        }else if (i == R.id.deportiva){
+            type = "deportiva";
+            mAcademia.setImageResource(R.drawable.academia_50);
+            mDeportiva.setImageResource(R.drawable.deportiva);
+            mOcio.setImageResource(R.drawable.ocio_50);
+            mOtro.setImageResource(R.drawable.otra_50);
+
+        }else if (i == R.id.ocio){
+            type = "ocio";
+            mAcademia.setImageResource(R.drawable.academia_50);
+            mDeportiva.setImageResource(R.drawable.deportiva_50);
+            mOcio.setImageResource(R.drawable.ocio);
+            mOtro.setImageResource(R.drawable.otra_50);
+
+        }else if (i == R.id.otro){
+            type = "otra";
+            mAcademia.setImageResource(R.drawable.academia_50);
+            mDeportiva.setImageResource(R.drawable.deportiva_50);
+            mOcio.setImageResource(R.drawable.ocio_50);
+            mOtro.setImageResource(R.drawable.otra);
+        }else if (i == R.id.crear){
+            cActivity();
+            Toast.makeText(getBaseContext(), "Actividad Creada", Toast.LENGTH_SHORT).show();
+            finish();
+
         }
 
     }
@@ -124,6 +153,13 @@ public class newActivityActivity extends AppCompatActivity implements View.OnTou
     @Override
     protected void onStart() {
         super.onStart();
+    }
+
+    protected void cActivity(){
+
+        activity activity = new activity(type, mDescription.getText().toString(), mPlace.getText().toString(),
+                mInicio.getText().toString(), mFinal.getText().toString(),
+                Integer.parseInt(mParticipantes.getText().toString()), MainActivity.userm.name);
     }
 
 

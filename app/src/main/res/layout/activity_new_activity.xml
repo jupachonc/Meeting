@@ -99,8 +99,8 @@
 
     <EditText
         android:id="@+id/place"
-        android:layout_width="360dp"
-        android:layout_height="40dp"
+        android:layout_width="187dp"
+        android:layout_height="46dp"
         android:layout_marginTop="60dp"
         android:ems="10"
         android:hint="ej. Plaza Ché"
@@ -108,7 +108,7 @@
         android:textColor="@color/grey_100"
         android:textColorHint="@color/grey_300"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.313"
+        app:layout_constraintHorizontal_bias="0.066"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/description" />
 
@@ -157,7 +157,7 @@
         android:id="@+id/academia"
         android:layout_width="90sp"
         android:layout_height="90sp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="12dp"
         android:layout_marginTop="152dp"
         android:clickable="true"
         app:layout_constraintStart_toStartOf="parent"
@@ -195,55 +195,54 @@
         android:layout_height="90sp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="152dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="12dp"
         android:clickable="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/ocio"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/otra" />
 
-    <ImageView
-        android:id="@+id/check_academia"
+    <TextView
+        android:id="@+id/participantes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="84dp"
-        android:layout_marginTop="152dp"
-        android:visibility="invisible"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/checkbox_on_background" />
+        android:layout_marginStart="156dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="10dp"
+        android:fontFamily="sans-serif-smallcaps"
+        android:text="# Participantes"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.076"
+        app:layout_constraintStart_toEndOf="@+id/place_label"
+        app:layout_constraintTop_toBottomOf="@+id/description" />
 
-    <ImageView
-        android:id="@+id/check_deportiva"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="152dp"
-        android:visibility="invisible"
-        app:layout_constraintStart_toEndOf="@+id/check_academia"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/checkbox_on_background" />
+    <EditText
+        android:id="@+id/nparticipantes"
+        android:layout_width="151dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="60dp"
+        android:ems="10"
+        android:hint="1-15"
+        android:inputType="number"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textColorHint="@color/grey_300"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.62"
+        app:layout_constraintStart_toEndOf="@+id/place"
+        app:layout_constraintTop_toBottomOf="@+id/description" />
 
-    <ImageView
-        android:id="@+id/check_ocio"
+    <Button
+        android:id="@+id/crear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="76dp"
-        android:layout_marginTop="152dp"
-        android:visibility="invisible"
-        app:layout_constraintStart_toEndOf="@+id/check_deportiva"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/checkbox_on_background" />
-
-    <ImageView
-        android:id="@+id/check_otro"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="76dp"
-        android:layout_marginTop="152dp"
-        android:visibility="invisible"
-        app:layout_constraintStart_toEndOf="@+id/check_ocio"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/checkbox_on_background" />
+        android:layout_marginBottom="80dp"
+        android:text="Crear"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
