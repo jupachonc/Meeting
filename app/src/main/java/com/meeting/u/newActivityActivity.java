@@ -53,6 +53,7 @@ public class newActivityActivity extends AppCompatActivity implements View.OnCli
         mDeportiva = findViewById(R.id.deportiva);
         mOcio = findViewById(R.id.ocio);
         mOtro = findViewById(R.id.otro);
+        type = "";
 
 
 
@@ -70,6 +71,7 @@ public class newActivityActivity extends AppCompatActivity implements View.OnCli
         int minutes = c.get(Calendar.MINUTE);
 
         if(i == R.id.academia){
+
             type = "academia";
             mAcademia.setImageResource(R.drawable.academia);
             mDeportiva.setImageResource(R.drawable.deportiva_50);
@@ -77,6 +79,7 @@ public class newActivityActivity extends AppCompatActivity implements View.OnCli
             mOtro.setImageResource(R.drawable.otra_50);
 
         }else if (i == R.id.deportiva){
+
             type = "deportiva";
             mAcademia.setImageResource(R.drawable.academia_50);
             mDeportiva.setImageResource(R.drawable.deportiva);
@@ -84,6 +87,7 @@ public class newActivityActivity extends AppCompatActivity implements View.OnCli
             mOtro.setImageResource(R.drawable.otra_50);
 
         }else if (i == R.id.ocio){
+
             type = "ocio";
             mAcademia.setImageResource(R.drawable.academia_50);
             mDeportiva.setImageResource(R.drawable.deportiva_50);
@@ -91,15 +95,27 @@ public class newActivityActivity extends AppCompatActivity implements View.OnCli
             mOtro.setImageResource(R.drawable.otra_50);
 
         }else if (i == R.id.otro){
+
             type = "otra";
             mAcademia.setImageResource(R.drawable.academia_50);
             mDeportiva.setImageResource(R.drawable.deportiva_50);
             mOcio.setImageResource(R.drawable.ocio_50);
             mOtro.setImageResource(R.drawable.otra);
+
         }else if (i == R.id.crear){
+
+            if((type != "") && (toString(mName) != "") && toString(mDescription) != "" && (toString(mPlace) != "")
+                    && (toString(mInicio) != "") && (toString(mFinal) != "") && validNumber(mParticipantes)) {
+
                 cActivity();
                 Toast.makeText(getBaseContext(), "Actividad Creada", Toast.LENGTH_SHORT).show();
                 finish();
+
+            }else{
+
+                Toast.makeText(getBaseContext(), "Revisa tus entradas", Toast.LENGTH_SHORT).show();
+            }
+
         }else if(i == R.id.inicio_time){
 
             TimePickerDialog timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
@@ -113,7 +129,6 @@ public class newActivityActivity extends AppCompatActivity implements View.OnCli
             timePickerDialog.show();
 
         }else if(i == R.id.final_time){
-
 
             TimePickerDialog timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
                 @Override
@@ -140,9 +155,18 @@ public class newActivityActivity extends AppCompatActivity implements View.OnCli
         activity.toDB();
     }
 
-    protected boolean checkActivity(String s){
-        return !(s.equals("")|| s.equals(" "));
+    protected String toString(EditText s){
+        return s.getText().toString();
     }
 
+    protected boolean validNumber(EditText num){
+        boolean check = false;
+        try {
+            int number = Integer.parseInt(toString(num));
+            if (1 < number && number <= 15 ){check = true;}
+        } catch (NumberFormatException e) {
+        }
+        return check;
+    }
 
 }
