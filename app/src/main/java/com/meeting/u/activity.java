@@ -1,5 +1,8 @@
 package com.meeting.u;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class activity {
 
     private String tipo;
@@ -12,6 +15,8 @@ public class activity {
     private int disponibles;
     private String[] participantes;
 
+
+
     activity(String tipo, String name, String descripción, String place, String hora_incio, String hora_fin, int participantes, String nombre){
 
         this.tipo = tipo;
@@ -23,66 +28,33 @@ public class activity {
         nparticipantes = participantes;
         disponibles = participantes - 1;
         this.participantes = new String[participantes];
-        this.participantes[0] = nombre;
+        this.participantes[nparticipantes - (disponibles + 1)] = nombre;
 
     }
 
-    void toDB(){}
+    protected void toDB(){
+        // Write a message to the database
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference(tipo);
+        DatabaseReference activity = myRef.push();
 
+        activity.child("name").setValue(name);
+        activity.child("description").setValue(descripción);
+        activity.child("place").setValue(place);
+        activity.child("hora_inicio").setValue(hora_incio);
+        activity.child("hora_fin").setValue(hora_fin);
+        activity.child("amount_participants").setValue(String.valueOf(nparticipantes));
+        activity.child("availables").setValue(String.valueOf(disponibles));
 
-    public String getTipo() {
-        return tipo;
+        DatabaseReference actparticipantes = activity.child("participants");
+
+    for (int i = 0; i < participantes.length; i++){
+
+        actparticipantes.child(String.valueOf(i)).setValue(participantes[i]);
+    }
+    //myRef.push().child("participantes").child("uno").setValue(participantes[nparticipantes - (disponibles + 1)]);
+
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
 
-    public String getDescripción() {
-        return descripción;
-    }
-
-    public void setDescripción(String descripción) {
-        this.descripción = descripción;
-    }
-
-    public String getPlace() {
-        return place;
-    }
-
-    public void setPlace(String place) {
-        this.place = place;
-    }
-
-    public String getHora_incio() {
-        return hora_incio;
-    }
-
-    public void setHora_incio(String hora_incio) {
-        this.hora_incio = hora_incio;
-    }
-
-    public String getHora_fin() {
-        return hora_fin;
-    }
-
-    public void setHora_fin(String hora_fin) {
-        this.hora_fin = hora_fin;
-    }
-
-    public int getNparticipantes() {
-        return nparticipantes;
-    }
-
-    public void setNparticipantes(int nparticipantes) {
-        this.nparticipantes = nparticipantes;
-    }
-
-    public int getDisponibles() {
-        return disponibles;
-    }
-
-    public void setDisponibles(int disponibles) {
-        this.disponibles = disponibles;
-    }
 }
