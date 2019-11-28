@@ -25,6 +25,12 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
+
 public class ChatActivityView extends AppCompatActivity {
     private RecyclerView vistaChat;
     private EditText escribir;
@@ -37,6 +43,7 @@ public class ChatActivityView extends AppCompatActivity {
     private DatabaseReference databaseReference;
     private FirebaseStorage storage;
     private StorageReference storageReference;
+    private LocalDateTime localDateTime;
 
     private static final int PHOTO_SEND = 1;
 
@@ -45,10 +52,10 @@ public class ChatActivityView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_view);
 
-        vistaChat = (RecyclerView) findViewById(R.id.vistaChat);
-        escribir = (EditText) findViewById(R.id.escribir);
-        boton = (ImageButton) findViewById(R.id.boton);
-        btnFoto = (ImageButton) findViewById(R.id.btnFoto);
+        vistaChat = findViewById(R.id.vistaChat);
+        escribir = findViewById(R.id.escribir);
+        boton = findViewById(R.id.boton);
+        btnFoto = findViewById(R.id.btnFoto);
 
         database = FirebaseDatabase.getInstance();
         databaseReference = database.getReference("chat");//Sala chat
@@ -60,12 +67,16 @@ public class ChatActivityView extends AppCompatActivity {
         vistaChat.setLayoutManager(l);
         vistaChat.setAdapter(adapter);
 
+        //Obtención de hora actual
+
+        final DateFormat dateFormat = new SimpleDateFormat("HH:mm");
+        final Date date = new Date();
 
         boton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
                 //adapter.addMessage(new Mensaje("00:00","Juan Camilo",escribir.getText().toString()));
-                databaseReference.push().setValue(new Mensaje("00:00",LogInActivity.usuario.name,escribir.getText().toString()));
+                databaseReference.push().setValue(new Mensaje(dateFormat.format(date),LogInActivity.usuario.name,escribir.getText().toString()));
                 escribir.setText("");
             }
         });
