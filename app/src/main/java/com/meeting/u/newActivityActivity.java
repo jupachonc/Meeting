@@ -15,7 +15,7 @@ import android.widget.ImageView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-public class newActivityActivity extends AppCompatActivity implements View.OnTouchListener, View.OnClickListener{
+public class newActivityActivity extends AppCompatActivity implements View.OnClickListener{
 
     private String type;
     private EditText mName;
@@ -35,8 +35,8 @@ public class newActivityActivity extends AppCompatActivity implements View.OnTou
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_activity);
 
-        findViewById(R.id.inicio_time).setOnTouchListener(this);
-        findViewById(R.id.final_time).setOnTouchListener(this);
+        findViewById(R.id.inicio_time).setOnClickListener(this);
+        findViewById(R.id.final_time).setOnClickListener(this);
         findViewById(R.id.academia).setOnClickListener(this);
         findViewById(R.id.deportiva).setOnClickListener(this);
         findViewById(R.id.ocio).setOnClickListener(this);
@@ -59,61 +59,16 @@ public class newActivityActivity extends AppCompatActivity implements View.OnTou
 
     }
 
-    @SuppressLint("ClickableViewAccessibility")
+
+
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
-    public boolean onTouch(View v, MotionEvent event) {
+    public void onClick(View v) {
         int i = v.getId();
         final Calendar c = Calendar.getInstance();
         int hour = c.get(Calendar.HOUR_OF_DAY);
         int minutes = c.get(Calendar.MINUTE);
 
-        if(i == R.id.inicio_time){
-
-            TimePickerDialog timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
-                @Override
-                public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                    if(minute < 10){
-
-                        mInicio.setText(getString(hourOfDay, ":0", minute));
-
-                    }else{
-
-                        mInicio.setText(getString(hourOfDay, ":", minute));
-                    }
-
-
-                }
-            }, hour, minutes, false);
-            timePickerDialog.show();
-
-        }else if(i == R.id.final_time){
-
-
-            TimePickerDialog timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
-                @Override
-                public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                    if(minute < 10){
-
-                        mFinal.setText(getString(hourOfDay, ":0", minute));
-
-                    }else{
-
-                        mFinal.setText(getString(hourOfDay, ":", minute));
-                    }
-
-
-                }
-            }, hour, minutes, false);
-            timePickerDialog.show();
-        }
-        return true;
-    }
-
-
-    @Override
-    public void onClick(View v) {
-        int i = v.getId();
         if(i == R.id.academia){
             type = "academia";
             mAcademia.setImageResource(R.drawable.academia);
@@ -142,13 +97,33 @@ public class newActivityActivity extends AppCompatActivity implements View.OnTou
             mOcio.setImageResource(R.drawable.ocio_50);
             mOtro.setImageResource(R.drawable.otra);
         }else if (i == R.id.crear){
-            if(checkActivity(mName.getText().toString()) && checkActivity(mDescription.getText().toString())) {
                 cActivity();
                 Toast.makeText(getBaseContext(), "Actividad Creada", Toast.LENGTH_SHORT).show();
                 finish();
-            }else{
-                Toast.makeText(getBaseContext(),"Revisa tus entradas", Toast.LENGTH_SHORT).show();
-            }
+        }else if(i == R.id.inicio_time){
+
+            TimePickerDialog timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
+                @Override
+                public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+
+                        mInicio.setText(String.format("%02d:%02d", hourOfDay, minute));
+
+                }
+            }, hour, minutes, false);
+            timePickerDialog.show();
+
+        }else if(i == R.id.final_time){
+
+
+            TimePickerDialog timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
+                @Override
+                public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+
+                        mFinal.setText(String.format("%02d:%02d", hourOfDay, minute));
+
+                }
+            }, hour, minutes, false);
+            timePickerDialog.show();
         }
     }
 
@@ -166,7 +141,7 @@ public class newActivityActivity extends AppCompatActivity implements View.OnTou
     }
 
     protected boolean checkActivity(String s){
-        return !(s == "" || mName.getText().toString() == " ");
+        return !(s.equals("")|| s.equals(" "));
     }
 
 
