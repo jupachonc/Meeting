@@ -3,6 +3,7 @@ package com.meeting.u;
 public class activity {
 
     private String tipo;
+    private String name;
     private String descripción;
     private String place;
     private String hora_incio;
@@ -11,9 +12,10 @@ public class activity {
     private int disponibles;
     private String[] participantes;
 
-    activity(String tipo, String descripción, String place, String hora_incio, String hora_fin, int participantes, String nombre){
+    activity(String tipo, String name, String descripción, String place, String hora_incio, String hora_fin, int participantes, String nombre){
 
         this.tipo = tipo;
+        this.name = name;
         this.descripción = descripción;
         this.place = place;
         this.hora_incio = hora_incio;

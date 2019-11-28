@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/black_1"
     android:theme="@style/Theme.AppCompat.NoActionBar"
-    tools:context=".ActivityView">
+    tools:context=".ChatActivityView">
 
     <TextView
         android:id="@+id/textView6"
@@ -54,12 +54,13 @@
         android:layout_height="40dp"
         android:layout_marginLeft="16dp"
         android:layout_marginBottom="16dp"
-        android:background="@color/cardview_light_background"
+        android:background="@drawable/shape"
         android:hint="Escribe un mensaje"
         android:inputType="textCapSentences"
         android:paddingLeft="48dp"
         android:text=""
         android:textColor="@color/black_1"
+        android:textColorHint="@color/grey_500"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/boton"
         app:layout_constraintStart_toStartOf="parent" />

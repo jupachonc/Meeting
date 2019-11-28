@@ -18,6 +18,7 @@ import android.widget.Toast;
 public class newActivityActivity extends AppCompatActivity implements View.OnTouchListener, View.OnClickListener{
 
     private String type;
+    private EditText mName;
     private EditText mDescription;
     private EditText mPlace;
     private EditText mParticipantes;
@@ -42,6 +43,7 @@ public class newActivityActivity extends AppCompatActivity implements View.OnTou
         findViewById(R.id.otro).setOnClickListener(this);
         findViewById(R.id.crear).setOnClickListener(this);
 
+        mName = findViewById(R.id.activityname);
         mDescription = findViewById(R.id.description);
         mPlace = findViewById(R.id.place);
         mParticipantes = findViewById(R.id.nparticipantes);
@@ -140,10 +142,13 @@ public class newActivityActivity extends AppCompatActivity implements View.OnTou
             mOcio.setImageResource(R.drawable.ocio_50);
             mOtro.setImageResource(R.drawable.otra);
         }else if (i == R.id.crear){
-            cActivity();
-            Toast.makeText(getBaseContext(), "Actividad Creada", Toast.LENGTH_SHORT).show();
-            finish();
-
+            if(checkActivity(mName.getText().toString()) && checkActivity(mDescription.getText().toString())) {
+                cActivity();
+                Toast.makeText(getBaseContext(), "Actividad Creada", Toast.LENGTH_SHORT).show();
+                finish();
+            }else{
+                Toast.makeText(getBaseContext(),"Revisa tus entradas", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
@@ -154,10 +159,14 @@ public class newActivityActivity extends AppCompatActivity implements View.OnTou
 
     protected void cActivity(){
 
-        activity activity = new activity(type, mDescription.getText().toString(), mPlace.getText().toString(),
+        activity activity = new activity(type, mName.getText().toString(), mDescription.getText().toString(), mPlace.getText().toString(),
                 mInicio.getText().toString(), mFinal.getText().toString(),
                 Integer.parseInt(mParticipantes.getText().toString()), LogInActivity.usuario.name);
         activity.toDB();
+    }
+
+    protected boolean checkActivity(String s){
+        return !(s == "" || mName.getText().toString() == " ");
     }
 
 
