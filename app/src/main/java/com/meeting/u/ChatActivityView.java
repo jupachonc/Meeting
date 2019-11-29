@@ -47,6 +47,7 @@ public class ChatActivityView extends AppCompatActivity {
     private AdaptaMensaje adapter;
 
     private FirebaseDatabase database;
+    private DatabaseReference DBReference;
     private DatabaseReference databaseReference;
     private FirebaseStorage storage;
     private StorageReference storageReference;
@@ -65,7 +66,8 @@ public class ChatActivityView extends AppCompatActivity {
         btnFoto = findViewById(R.id.btnFoto);
 
         database = FirebaseDatabase.getInstance();
-        databaseReference = database.getReference("chat");//Sala chat
+        DBReference = database.getReference("Chats");
+        databaseReference = DBReference.child("proof");//Sala chat
 
         storage = FirebaseStorage.getInstance();
 
@@ -75,13 +77,12 @@ public class ChatActivityView extends AppCompatActivity {
         vistaChat.setAdapter(adapter);
 
 
-        final DateFormat dateFormat = new SimpleDateFormat("HH:mm a");
+        final DateFormat dateFormat = new SimpleDateFormat("hh:mm a");
         final Date date = new Date();
 
         boton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                //adapter.addMessage(new Mensaje("00:00","Juan Camilo",escribir.getText().toString()));
                 databaseReference.push().setValue(new Mensaje(dateFormat.format(date),LogInActivity.usuario.name,escribir.getText().toString(),"","1"));
                 escribir.setText("");
             }
@@ -145,55 +146,24 @@ public class ChatActivityView extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PHOTO_SEND && resultCode ==  RESULT_OK){
             Uri u = data.getData();
-            storageReference = storage.getReference("imgChat");//imágenes chat
-            final StorageReference fotoReferencia = storageReference.child(u.getLastPathSegment());
-            //
-            //StorageReference fotoReferencia = storageReference.child(u.getLastPathSegment());
-            //
-            final DateFormat dateFormat = new SimpleDateFormat("HH:mm a");
-            final Date date = new Date();
-            /*fotoReferencia.putFile(u).addOnSuccessListener(this, new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    FirebaseUser mUser = FirebaseAuth.getInstance().getCurrentUser();
-                    mUser.getIdToken(true)
-                            .addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
-                                public void onComplete(@NonNull Task<GetTokenResult> task) {
-                                    String idToken = "";
-                                    if (task.isSuccessful()) {
-                                        idToken = task.getResult().getToken();
-                                        // Send token to your backend via HTTPS
-                                        // ...
-                                    } else {
-                                        // Handle error -> task.getException();
-                                    }
-                                    Mensaje m = new Mensaje(dateFormat.format(date), LogInActivity.usuario.name, "", idToken, "2");
-                                    databaseReference.push().setValue(m);
-                                }
-                            });
-                }
-                });
+            storageReference = storage.getReference("imgChat");
 
-             */
+            //imágenes chat
+            final StorageReference fotoReferencia = storageReference.child(u.getLastPathSegment());
+            final DateFormat dateFormat = new SimpleDateFormat("hh:mm a");
+            final Date date = new Date();
 
             fotoReferencia.putFile(u).addOnSuccessListener(this, new OnSuccessListener<UploadTask.TaskSnapshot>() {
 
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    //Task<Uri> u = taskSnapshot.getMetadata().getReference().getDownloadUrl();
-                    //Uri u = taskSnapshot.getDownloadUrl().getResult();
-                    //Uri u = taskSnapshot.getDownloadUrl();
 
-                    StorageMetadata snapshotMetadata = taskSnapshot.getMetadata();
                     Task<Uri> downloadUrl = fotoReferencia.getDownloadUrl();
                     downloadUrl.addOnSuccessListener(new OnSuccessListener<Uri>() {
 
                         @Override
                         public void onSuccess(Uri uri) {
                             String u = uri.toString();
-                            //StorageReference u = taskSnapshot.getMetadata().getReference();
-                            //Uri u = taskSnapshot.getAutenticationReference();
-                            //Task<Uri> u = Objects.requireNonNull(Objects.requireNonNull(taskSnapshot.getMetadata()).getReference()).getDownloadUrl();
                             Mensaje m = new Mensaje(dateFormat.format(date),LogInActivity.usuario.name,"",u,"2");
                             databaseReference.push().setValue(m);
                         }
