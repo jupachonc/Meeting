@@ -12,49 +12,49 @@
         android:id="@+id/activityname_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
-        android:layout_marginTop="250dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
         android:fontFamily="sans-serif-smallcaps"
         android:text="@string/activityname"
         android:textColor="#FFFFFF"
         android:textColorHint="@color/grey_100"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.091"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/academia" />
 
     <EditText
         android:id="@+id/activityname"
-        android:layout_width="370dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="288dp"
-        android:layout_marginEnd="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="43dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:ems="10"
+        android:textSize="15sp"
         android:gravity="start|top"
         android:hint="@string/activitynamehint"
         android:inputType="textAutoCorrect|textMultiLine|textNoSuggestions|textCapSentences"
         android:textColor="@color/grey_100"
         android:textColorHint="@color/grey_300"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.41"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/activityname_label" />
 
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:fontFamily="sans-serif-smallcaps"
         android:text="@string/Create_new_activity"
         android:textColor="#FFFFFF"
-        android:textSize="30sp"
+        android:textSize="28sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.058" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/type_label"
@@ -71,21 +71,20 @@
 
     <EditText
         android:id="@+id/description"
-        android:layout_width="370dp"
+        android:layout_width="match_parent"
         android:layout_height="86dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="396dp"
-        android:layout_marginEnd="5dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:ems="10"
+        android:textSize="15sp"
         android:gravity="start|top"
         android:hint="@string/description"
         android:inputType="textAutoCorrect|textMultiLine|textCapSentences"
         android:textColor="@color/grey_100"
         android:textColorHint="@color/grey_300"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.437"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/descrition_label" />
 
     <TextView
         android:id="@+id/fin"
@@ -96,25 +95,20 @@
         android:text="@string/end"
         android:textColor="@color/white"
         android:textSize="22sp"
-        app:layout_constraintEnd_toStartOf="@+id/final_time"
-        app:layout_constraintHorizontal_bias="0.82"
-        app:layout_constraintStart_toEndOf="@+id/inicio_time"
-        app:layout_constraintTop_toBottomOf="@+id/place" />
+        app:layout_constraintStart_toStartOf="@+id/nparticipantes"
+        app:layout_constraintTop_toBottomOf="@+id/nparticipantes" />
 
     <TextView
         android:id="@+id/participantes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="156dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="sans-serif-smallcaps"
         android:text="# Participantes"
         android:textColor="@color/white"
         android:textSize="22sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.09"
-        app:layout_constraintStart_toEndOf="@+id/place_label"
+        app:layout_constraintBottom_toTopOf="@+id/nparticipantes"
+        app:layout_constraintStart_toStartOf="@+id/nparticipantes"
         app:layout_constraintTop_toBottomOf="@+id/description" />
 
     <TextView
@@ -132,80 +126,80 @@
 
     <EditText
         android:id="@+id/place"
-        android:layout_width="187dp"
-        android:layout_height="46dp"
-        android:layout_marginTop="68dp"
+        android:layout_width="0dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="16dp"
         android:ems="10"
+        android:textSize="15sp"
         android:hint="ej. Plaza Ché"
         android:inputType="textPersonName|textCapSentences"
         android:textColor="@color/grey_100"
         android:textColorHint="@color/grey_300"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.075"
+        app:layout_constraintEnd_toStartOf="@+id/nparticipantes"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/description" />
+        app:layout_constraintTop_toBottomOf="@+id/place_label" />
 
     <EditText
         android:id="@+id/nparticipantes"
-        android:layout_width="151dp"
+        android:layout_width="0dp"
         android:layout_height="43dp"
-        android:layout_marginTop="68dp"
+        android:layout_marginEnd="16dp"
         android:ems="10"
+        android:textSize="15sp"
         android:hint="2-15"
         android:inputType="number"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textColorHint="@color/grey_300"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.642"
         app:layout_constraintStart_toEndOf="@+id/place"
-        app:layout_constraintTop_toBottomOf="@+id/description" />
+        app:layout_constraintTop_toBottomOf="@+id/place_label" />
 
     <TextView
         android:id="@+id/descrition_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="sans-serif-smallcaps"
         android:text="@string/add_description"
         android:textColor="#FFFFFF"
         android:textColorHint="@color/grey_100"
         android:textSize="22sp"
-        app:layout_constraintBottom_toTopOf="@+id/description"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.044"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/activityname" />
 
     <EditText
         android:id="@+id/final_time"
         android:layout_width="92dp"
-        android:layout_height="38dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="28dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:contextClickable="false"
         android:ems="10"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
         android:inputType="none"
         android:textColor="@color/white"
         android:textSize="16sp"
-        android:focusable="false"
-        android:focusableInTouchMode="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/place" />
+        app:layout_constraintStart_toEndOf="@+id/fin"
+        app:layout_constraintTop_toBottomOf="@+id/nparticipantes" />
 
     <EditText
         android:id="@+id/inicio_time"
         android:layout_width="92dp"
-        android:layout_height="38dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="16dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:contextClickable="false"
         android:ems="10"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
         android:inputType="none"
         android:textColor="@color/white"
         android:textSize="16sp"
-        android:focusable="false"
-        android:focusableInTouchMode="false"
         app:layout_constraintStart_toEndOf="@+id/inicio"
         app:layout_constraintTop_toBottomOf="@+id/place" />
 
@@ -213,72 +207,69 @@
         android:id="@+id/place_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="116dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="sans-serif-smallcaps"
         android:text="@string/place"
         android:textColor="#FFFFFF"
         android:textSize="22sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.048"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/descrition_label" />
+        app:layout_constraintTop_toBottomOf="@+id/description" />
 
     <ImageView
         android:id="@+id/academia"
-        android:layout_width="90dp"
-        android:layout_height="90dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="152dp"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="16dp"
         android:clickable="true"
+        app:layout_constraintEnd_toStartOf="@+id/deportiva"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/type_label"
         app:srcCompat="@drawable/academia" />
 
     <ImageView
         android:id="@+id/deportiva"
-        android:layout_width="90dp"
-        android:layout_height="90dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="152dp"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="16dp"
         android:clickable="true"
         app:layout_constraintEnd_toStartOf="@+id/ocio"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/academia"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/type_label"
         app:srcCompat="@drawable/deportiva" />
 
     <ImageView
         android:id="@+id/ocio"
-        android:layout_width="90dp"
-        android:layout_height="90dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="152dp"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="16dp"
         android:clickable="true"
         app:layout_constraintEnd_toStartOf="@+id/otro"
         app:layout_constraintStart_toEndOf="@+id/deportiva"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/type_label"
         app:srcCompat="@drawable/ocio" />
 
     <ImageView
         android:id="@+id/otro"
-        android:layout_width="90dp"
-        android:layout_height="90dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="152dp"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="16dp"
         android:clickable="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/ocio"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/type_label"
         app:srcCompat="@drawable/otra" />
 
     <Button
         android:id="@+id/crear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="650dp"
+        android:layout_marginTop="16dp"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
         android:text="Crear"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/inicio_time" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

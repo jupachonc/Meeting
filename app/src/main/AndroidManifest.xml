@@ -13,6 +13,7 @@
         <activity android:name=".newActivityActivity" />
         <activity android:name=".Profile" />
         <activity android:name=".ChatActivityView" />
+        <activity android:name=".Course"/>
         <activity android:name=".LogInActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
