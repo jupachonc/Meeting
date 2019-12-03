@@ -10,4 +10,9 @@ public class activityjoin extends activity {
 
         this.id = id;
     }
+
+    @Override
+    protected void toDB(){
+
+    }
 }
