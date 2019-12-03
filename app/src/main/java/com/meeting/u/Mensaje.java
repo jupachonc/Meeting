@@ -13,11 +13,18 @@ public class Mensaje {
 
     public Mensaje(String hora, String nombre, String mensaje, String urlFoto, String type_mensaje) {
         //public Mensaje(String nombre, String mensaje, String urlFoto, String type_mensaje) {
-        this.hora = hora;
-        this.nombre = nombre;
-        this.mensaje = mensaje;
-        this.urlFoto = urlFoto;
-        this.type_mensaje = type_mensaje;
+
+        mensaje = mensaje.trim();
+
+        if (!mensaje.equals("")){
+            this.hora = hora;
+            this.nombre = nombre;
+            this.mensaje = mensaje;
+            this.urlFoto = urlFoto;
+            this.type_mensaje = type_mensaje;
+        }else{
+            //
+        }
     }
 
     public String getHora() {

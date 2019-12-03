@@ -43,8 +43,9 @@ public class ChatActivityView extends AppCompatActivity {
     private EditText escribir;
     private ImageButton boton;
     private ImageButton btnFoto;
+    private ImageButton btnDown;
 
-    private AdaptaMensaje adapter;
+    public AdaptaMensaje adapter;
 
     private FirebaseDatabase database;
     private DatabaseReference DBReference;
@@ -64,10 +65,11 @@ public class ChatActivityView extends AppCompatActivity {
         escribir = findViewById(R.id.escribir);
         boton = findViewById(R.id.boton);
         btnFoto = findViewById(R.id.btnFoto);
+        btnDown = findViewById(R.id.btnDown);
 
         database = FirebaseDatabase.getInstance();
         DBReference = database.getReference("Chats");
-        databaseReference = DBReference.child("proof");//Sala chat
+        databaseReference = DBReference.child("Proof");//Sala chat
 
         storage = FirebaseStorage.getInstance();
 
@@ -76,11 +78,10 @@ public class ChatActivityView extends AppCompatActivity {
         vistaChat.setLayoutManager(l);
         vistaChat.setAdapter(adapter);
 
-
         final DateFormat dateFormat = new SimpleDateFormat("hh:mm a");
         final Date date = new Date();
 
-        boton.setOnClickListener(new View.OnClickListener(){
+        boton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
                 databaseReference.push().setValue(new Mensaje(dateFormat.format(date),LogInActivity.usuario.name,escribir.getText().toString(),"","1"));
@@ -98,13 +99,16 @@ public class ChatActivityView extends AppCompatActivity {
             }
         });
 
-        adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+
+        btnDown.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemRangeInserted(int positionStart, int itemCount) {
-                super.onItemRangeInserted(positionStart, itemCount);
-                setScrollbar();
+            public void onClick(View view) {
+                vistaChat.scrollToPosition(adapter.getItemCount()-1);
             }
         });
+
+
+        scrollAdapter();
 ///*
         databaseReference.addChildEventListener(new ChildEventListener() {
             @Override
@@ -135,10 +139,7 @@ public class ChatActivityView extends AppCompatActivity {
         });
 
         //*/
-    }
-
-    private void setScrollbar(){
-        vistaChat.scrollToPosition(adapter.getItemCount()-1);
+        scrollSend();
     }
 
     @Override
@@ -164,14 +165,31 @@ public class ChatActivityView extends AppCompatActivity {
                         @Override
                         public void onSuccess(Uri uri) {
                             String u = uri.toString();
-                            Mensaje m = new Mensaje(dateFormat.format(date),LogInActivity.usuario.name,"",u,"2");
+                            Mensaje m = new Mensaje(dateFormat.format(date),LogInActivity.usuario.name,"_________________________________",u,"2");
                             databaseReference.push().setValue(m);
+                            scrollSend();
                         }
 
                     });
                 }
             });
-
+            scrollSend();
         }
+        scrollSend();
+    }
+
+
+    private void scrollAdapter(){
+        adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onItemRangeInserted(int positionStart, int itemCount) {
+                super.onItemRangeInserted(positionStart, itemCount);
+                scrollSend();
+            }
+        });
+    }
+
+    private void scrollSend(){
+        vistaChat.scrollToPosition(adapter.getItemCount()-1);
     }
 }

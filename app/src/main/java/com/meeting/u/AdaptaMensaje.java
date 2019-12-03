@@ -10,11 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.SimpleTimeZone;
 
 public class AdaptaMensaje extends RecyclerView.Adapter<HolderMessage> {
 
@@ -39,12 +36,26 @@ public class AdaptaMensaje extends RecyclerView.Adapter<HolderMessage> {
 
     @Override
     public void onBindViewHolder(@NonNull HolderMessage holder, int position) {
+
+/*
+        String newName = listMensaje.get(2).getNombre();
+        String actualName = listMensaje.get(position).getNombre();
+        if (newName == actualName) {
+            holder.getNombre().setVisibility(View.GONE);
+        } else{
+            holder.getNombre().setVisibility(View.VISIBLE);
+        }
+
+ */
+
+
         holder.getHora().setText(listMensaje.get(position).getHora());
         holder.getMensaje().setText(listMensaje.get(position).getMensaje());
         holder.getNombre().setText(listMensaje.get(position).getNombre());
         if(listMensaje.get(position).getType_mensaje().equals("2")){
             holder.getFotoMensaje().setVisibility(View.VISIBLE);
             holder.getMensaje().setVisibility(View.VISIBLE);
+            holder.getMensaje().setTextColor(127);//COLOR TRANSPARENTE
             Glide.with(c).load(listMensaje.get(position).getUrlFoto()).into(holder.getFotoMensaje());
         } else if(listMensaje.get(position).getType_mensaje().equals("1")){
             holder.getFotoMensaje().setVisibility(View.GONE);

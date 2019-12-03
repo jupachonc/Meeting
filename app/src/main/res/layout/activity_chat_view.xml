@@ -26,18 +26,19 @@
         android:id="@+id/vistaChat"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="0dp"
         android:layout_marginBottom="8dp"
         android:layout_weight="1"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/escribir"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6"
-        android:textColor="#FFFFFF"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        android:scrollbars="vertical"
+        app:stackFromEnd="true"
+        app:reverseLayout="true"/>
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -51,15 +52,20 @@
     <EditText
         android:id="@+id/escribir"
         android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/shape"
+
         android:hint="Escribe un mensaje"
-        android:inputType="textCapSentences"
+        android:maxHeight="120dp"
         android:paddingLeft="48dp"
+        android:paddingTop="6dp"
+        android:paddingRight="6dp"
+        android:paddingBottom="10dp"
         android:text=""
         android:textColor="@color/black_1"
+        android:textColorHint="@color/grey_500"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/boton"
         app:layout_constraintStart_toStartOf="parent" />
@@ -69,8 +75,8 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginStart="8dp"
-        android:layout_marginEnd="12dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/arrow"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -80,9 +86,19 @@
         android:id="@+id/btnFoto"
         android:layout_width="25dp"
         android:layout_height="25dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginBottom="23dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/image_icon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/btnDown"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@android:drawable/arrow_down_float"
+        app:layout_constraintBottom_toBottomOf="@+id/vistaChat"
+        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
