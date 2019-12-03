@@ -104,7 +104,7 @@ public class newActivityActivity extends AppCompatActivity implements View.OnCli
 
         }else if (i == R.id.crear){
 
-            if((type != "") && (toString(mName) != "") && toString(mDescription) != "" && (toString(mPlace) != "")
+            if((type != "") && (toString(mName) != "") && (toString(mDescription) != "") && (toString(mPlace) != "")
                     && (toString(mInicio) != "") && (toString(mFinal) != "") && validNumber(mParticipantes)) {
 
                 cActivity();
