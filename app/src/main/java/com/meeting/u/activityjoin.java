@@ -13,6 +13,7 @@ public class activityjoin extends activity {
 
     @Override
     protected void toDB(){
+        //jjhjhjhjhhjhjk
 
     }
 }
