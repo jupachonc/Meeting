@@ -27,7 +27,7 @@ public class student extends user {
     }
 
     @Override
-    public void getScore() {
+    public float getScore() {
         super.getScore();
         final float[] f = new float[1];
         // Read from the database
@@ -55,7 +55,7 @@ public class student extends user {
             }
         });
 
-        score = f[0];
+        return f[0];
     }
 
     /*@Override

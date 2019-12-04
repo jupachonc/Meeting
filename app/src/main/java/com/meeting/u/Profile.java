@@ -52,7 +52,7 @@ public class Profile extends AppCompatActivity implements OnClickListener {
         TextView mId = findViewById(R.id.id);
         mId.setText("ID: "+ LogInActivity.usuario.id);
         TextView mScore = findViewById(R.id.score);
-        mScore.setText(String.valueOf(LogInActivity.usuario.score));
+        mScore.setText(String.valueOf(LogInActivity.usuario.getScore()));
 
     }
 

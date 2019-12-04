@@ -193,7 +193,7 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
     private void updateUI(FirebaseUser user) {
         if (user != null) {
             usuario = new student(user.getDisplayName(), user.getEmail(), user.getUid());
-            usuario.getScore();
+            //usuario.getScore();
             Intent goToMain = new Intent(this, MainActivity.class);
             startActivity(goToMain);
             findViewById(R.id.signInButton).setVisibility(View.GONE);
