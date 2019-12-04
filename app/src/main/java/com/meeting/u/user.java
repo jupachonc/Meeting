@@ -8,4 +8,8 @@ public class user {
     public String user_type;
     public float score;
 
+    public void getScore(){}
+
 }
+
+
