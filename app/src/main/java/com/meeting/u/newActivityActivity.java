@@ -1,19 +1,34 @@
 package com.meeting.u;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.app.TimePickerDialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.icu.util.Calendar;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TimePicker;
 import android.widget.Toast;
+
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.Objects;
 
 public class newActivityActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -28,6 +43,7 @@ public class newActivityActivity extends AppCompatActivity implements View.OnCli
     private ImageView mDeportiva;
     private ImageView mOcio;
     private ImageView mOtro;
+    public Button crear;
 
 
     @Override
@@ -54,9 +70,6 @@ public class newActivityActivity extends AppCompatActivity implements View.OnCli
         mOcio = findViewById(R.id.ocio);
         mOtro = findViewById(R.id.otro);
         type = "";
-
-
-
 
     }
 
@@ -104,17 +117,7 @@ public class newActivityActivity extends AppCompatActivity implements View.OnCli
 
         }else if (i == R.id.crear){
 
-            if((type != "") && (toString(mName) != "") && (toString(mDescription) != "") && (toString(mPlace) != "")
-                    && (toString(mInicio) != "") && (toString(mFinal) != "") && validNumber(mParticipantes)) {
-
-                cActivity();
-                Toast.makeText(getBaseContext(), "Actividad Creada", Toast.LENGTH_SHORT).show();
-                finish();
-
-            }else{
-
-                Toast.makeText(getBaseContext(), "Revisa tus entradas", Toast.LENGTH_SHORT).show();
-            }
+            uploadActi();
 
         }else if(i == R.id.inicio_time){
 
@@ -140,6 +143,22 @@ public class newActivityActivity extends AppCompatActivity implements View.OnCli
             }, hour, minutes, false);
             timePickerDialog.show();
         }
+    }
+
+    public void uploadActi() {
+        if((type != "") && (toString(mName) != "") && (toString(mDescription) != "") && (toString(mPlace) != "")
+                && (toString(mInicio) != "") && (toString(mFinal) != "") && validNumber(mParticipantes)
+                && (mName.length()<=32) && (mPlace.length()<=22)){
+
+            cActivity();
+            Toast.makeText(getBaseContext(), "Actividad Creada", Toast.LENGTH_SHORT).show();
+            finish();
+
+        }
+        else if (Objects.equals(type, ""))Toast.makeText(getBaseContext(), "Selecciona tipo de actividad", Toast.LENGTH_SHORT).show();
+        else if (mName.length()>32) Toast.makeText(getBaseContext(), "Nombre demasiado largo", Toast.LENGTH_SHORT).show();
+        else if (mPlace.length()>22) Toast.makeText(getBaseContext(), "Lugar demasiado largo", Toast.LENGTH_SHORT).show();
+        else Toast.makeText(getBaseContext(), "Revisa tus entradas", Toast.LENGTH_SHORT).show();
     }
 
     @Override

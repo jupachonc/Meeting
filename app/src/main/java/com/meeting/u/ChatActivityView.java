@@ -100,6 +100,7 @@ public class ChatActivityView extends AppCompatActivity {
         });
 
 
+
         btnDown.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

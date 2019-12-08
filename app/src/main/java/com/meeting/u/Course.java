@@ -18,6 +18,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import static java.lang.annotation.ElementType.CONSTRUCTOR;
+
 public class Course extends AppCompatActivity {
 
     private RecyclerView vista;
@@ -35,7 +37,8 @@ public class Course extends AppCompatActivity {
         vista = findViewById(R.id.vista);
 
         databaseA = FirebaseDatabase.getInstance();
-        databaseReferenceA = databaseA.getReference("Nombre Actividad");//Activity name HAY QUE RECIBIR ESTO DE LOS DATOS QUE HAYA INGRESADO EL USUARIO
+        databaseReferenceA = databaseA.getReference("Activities");//Activity name HAY QUE RECIBIR ESTO DE LOS DATOS QUE HAYA INGRESADO EL USUARIO
+
 
         adapter = new AdapterActivity(this);
         LinearLayoutManager l = new LinearLayoutManager(this);
@@ -43,22 +46,23 @@ public class Course extends AppCompatActivity {
         vista.setAdapter(adapter);
 
         //BOTON ACTUALIZAR Y ENVÍO LOS DATOS
-        /*
-        botonEnvio.setOnClickListener(new View.OnClickListener() {
+        //DONT TOUCH
+        /*final newActivityActivity newActivityActivity = new newActivityActivity();
+        newActivityActivity.crear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                databaseReference.push().setValue(new DatosCourse(DATOS A ENVIAR AL CONSTRUCTOR DE DATOSCOURSE))
+                //databaseReferenceA.push().setValue(new DatosCourse(DATOS A ENVIAR AL CONSTRUCTOR DE DATOSCOURSE));
+                newActivityActivity.uploadActi();
             }
         });
 
          */
 
-
         databaseReferenceA.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 //Cuando añade datos a la base de datos, los actualiza en Recycler View (la vista del cliente)
-                DatosCourse m = dataSnapshot.getValue(DatosCourse.class);
+                activity m = dataSnapshot.getValue(activity.class);
                 adapter.addActivity(m);
             }
 
@@ -82,5 +86,9 @@ public class Course extends AppCompatActivity {
 
             }
         });
+
+
     }
+
+
 }

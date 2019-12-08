@@ -1,5 +1,6 @@
 package com.meeting.u;
 
+import android.os.Bundle;
 import android.util.Log;
 
 import com.google.firebase.database.DataSnapshot;
@@ -23,8 +24,14 @@ public class activity {
     private String[] participantes;
 
 
+    public FirebaseDatabase database = FirebaseDatabase.getInstance();
+    public DatabaseReference myDB = database.getReference("Activities");
 
-    activity(String tipo, String name, String descripción, String place, String hora_incio, String hora_fin, int participantes, String nombre){
+    //Dont Touch
+    public activity() {
+    }
+
+    public activity(String tipo, String name, String descripción, String place, String hora_incio, String hora_fin, int participantes, String nombre){
 
         this.tipo = tipo;
         this.name = name;
@@ -40,18 +47,18 @@ public class activity {
     }
 
     protected void toDB(){
-
         // Registrar actividad en la Base de Datos
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myDB = database.getReference("Activities");
         final DatabaseReference activity = myDB.push();
 
-        activity.child("type").setValue(tipo);
+        //myDB.push().setValue(new activity(tipo, name, descripción, place, hora_incio, hora_fin, nparticipantes, disponibles));
+
+        //DEBARÍAN CONSERVAR EL MISMO NOMBRE EN LA DB<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+        activity.child("tipo").setValue(tipo);
         activity.child("name").setValue(name);
         activity.child("description").setValue(descripción);
         activity.child("place").setValue(place);
-        activity.child("hora_inicio").setValue(hora_incio);
+        activity.child("hora_incio").setValue(hora_incio);
         activity.child("hora_fin").setValue(hora_fin);
         activity.child("amount_participants").setValue(String.valueOf(nparticipantes));
         activity.child("availables").setValue(String.valueOf(disponibles));
@@ -98,6 +105,92 @@ public class activity {
 
         }
 
+    public String getTipo() {
+        return tipo;
     }
 
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescripción() {
+        return descripción;
+    }
+
+    public void setDescripción(String descripción) {
+        this.descripción = descripción;
+    }
+
+    public String getPlace() {
+        return place;
+    }
+
+    public void setPlace(String place) {
+        this.place = place;
+    }
+
+    public String getHora_incio() {
+        return hora_incio;
+    }
+
+    public void setHora_incio(String hora_incio) {
+        this.hora_incio = hora_incio;
+    }
+
+    public String getHora_fin() {
+        return hora_fin;
+    }
+
+    public void setHora_fin(String hora_fin) {
+        this.hora_fin = hora_fin;
+    }
+
+    public int getNparticipantes() {
+        return nparticipantes;
+    }
+
+    public void setNparticipantes(int nparticipantes) {
+        this.nparticipantes = nparticipantes;
+    }
+
+    public int getDisponibles() {
+        return disponibles;
+    }
+
+    public void setDisponibles(int disponibles) {
+        this.disponibles = disponibles;
+    }
+
+    public String[] getParticipantes() {
+        return participantes;
+    }
+
+    public void setParticipantes(String[] participantes) {
+        this.participantes = participantes;
+    }
+
+    public FirebaseDatabase getDatabase() {
+        return database;
+    }
+
+    public void setDatabase(FirebaseDatabase database) {
+        this.database = database;
+    }
+
+    public DatabaseReference getMyDB() {
+        return myDB;
+    }
+
+    public void setMyDB(DatabaseReference myDB) {
+        this.myDB = myDB;
+    }
+}
 

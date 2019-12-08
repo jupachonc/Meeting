@@ -1,6 +1,7 @@
 package com.meeting.u;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class AdaptaMensaje extends RecyclerView.Adapter<HolderMessage> {
 
@@ -36,18 +38,6 @@ public class AdaptaMensaje extends RecyclerView.Adapter<HolderMessage> {
 
     @Override
     public void onBindViewHolder(@NonNull HolderMessage holder, int position) {
-
-/*
-        String newName = listMensaje.get(2).getNombre();
-        String actualName = listMensaje.get(position).getNombre();
-        if (newName == actualName) {
-            holder.getNombre().setVisibility(View.GONE);
-        } else{
-            holder.getNombre().setVisibility(View.VISIBLE);
-        }
-
- */
-
 
         holder.getHora().setText(listMensaje.get(position).getHora());
         holder.getMensaje().setText(listMensaje.get(position).getMensaje());

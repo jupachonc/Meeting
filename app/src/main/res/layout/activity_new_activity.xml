@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/black_1"
     tools:context=".newActivityActivity"
+    android:scrollbars="vertical"
     tools:layout_editor_absoluteY="25dp">
 
     <TextView
@@ -49,7 +50,7 @@
         android:fontFamily="sans-serif-smallcaps"
         android:text="@string/Create_new_activity"
         android:textColor="#FFFFFF"
-        android:textSize="28sp"
+        android:textSize="26sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -72,7 +73,7 @@
     <EditText
         android:id="@+id/description"
         android:layout_width="match_parent"
-        android:layout_height="86dp"
+        android:layout_height="75dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:ems="10"
@@ -268,8 +269,10 @@
         android:paddingLeft="30dp"
         android:paddingRight="30dp"
         android:text="Crear"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inicio_time" />
+        app:layout_constraintTop_toBottomOf="@+id/inicio_time"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
