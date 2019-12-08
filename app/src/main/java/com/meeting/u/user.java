@@ -8,8 +8,6 @@ public class user {
     public String user_type;
     public float score;
 
-    public void getScore(){}
-
     public String getId() {
         return id;
     }
@@ -40,6 +38,10 @@ public class user {
 
     public void setUser_type(String user_type) {
         this.user_type = user_type;
+    }
+
+    public float getScore() {
+        return score;
     }
 
     public void setScore(float score) {

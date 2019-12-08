@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:background="@color/black_1"
     tools:context=".newActivityActivity"
-    android:scrollbars="vertical"
     tools:layout_editor_absoluteY="25dp">
 
     <TextView
@@ -32,12 +31,12 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:ems="10"
-        android:textSize="15sp"
         android:gravity="start|top"
         android:hint="@string/activitynamehint"
         android:inputType="textAutoCorrect|textMultiLine|textNoSuggestions|textCapSentences"
         android:textColor="@color/grey_100"
-        android:textColorHint="@color/grey_300"
+        android:textColorHint="@color/grey_500"
+        android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/activityname_label" />
@@ -77,12 +76,12 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:ems="10"
-        android:textSize="15sp"
         android:gravity="start|top"
         android:hint="@string/description"
         android:inputType="textAutoCorrect|textMultiLine|textCapSentences"
         android:textColor="@color/grey_100"
-        android:textColorHint="@color/grey_300"
+        android:textColorHint="@color/grey_500"
+        android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/descrition_label" />
@@ -103,7 +102,7 @@
         android:id="@+id/participantes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="12dp"
         android:fontFamily="sans-serif-smallcaps"
         android:text="# Participantes"
         android:textColor="@color/white"
@@ -131,11 +130,11 @@
         android:layout_height="43dp"
         android:layout_marginStart="16dp"
         android:ems="10"
-        android:textSize="15sp"
         android:hint="ej. Plaza Ché"
         android:inputType="textPersonName|textCapSentences"
         android:textColor="@color/grey_100"
-        android:textColorHint="@color/grey_300"
+        android:textColorHint="@color/grey_500"
+        android:textSize="15sp"
         app:layout_constraintEnd_toStartOf="@+id/nparticipantes"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/place_label" />
@@ -146,12 +145,12 @@
         android:layout_height="43dp"
         android:layout_marginEnd="16dp"
         android:ems="10"
-        android:textSize="15sp"
         android:hint="2-15"
         android:inputType="number"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textColorHint="@color/grey_300"
+        android:textColorHint="@color/grey_500"
+        android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/place"
         app:layout_constraintTop_toBottomOf="@+id/place_label" />
@@ -182,9 +181,11 @@
         android:ems="10"
         android:focusable="false"
         android:focusableInTouchMode="false"
+        android:hint="ej. 15:00"
         android:inputType="none"
         android:textColor="@color/white"
-        android:textSize="16sp"
+        android:textColorHint="@color/grey_500"
+        android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/fin"
         app:layout_constraintTop_toBottomOf="@+id/nparticipantes" />
 
@@ -198,9 +199,11 @@
         android:ems="10"
         android:focusable="false"
         android:focusableInTouchMode="false"
+        android:hint="ej. 13:00"
         android:inputType="none"
         android:textColor="@color/white"
-        android:textSize="16sp"
+        android:textColorHint="@color/grey_500"
+        android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/inicio"
         app:layout_constraintTop_toBottomOf="@+id/place" />
 
@@ -274,5 +277,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inicio_time"
         app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="-20dp"
+        android:text="V. 1 AltairVegaDeneb"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
