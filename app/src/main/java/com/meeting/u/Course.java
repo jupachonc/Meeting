@@ -55,7 +55,6 @@ public class Course extends AppCompatActivity {
                 OnActivities.keyID = id;
                 Intent goToOnActivity = new Intent(Course.this, OnActivities.class);
                 startActivity(goToOnActivity);
-                Toast.makeText(getBaseContext(), id, Toast.LENGTH_SHORT).show();
             }
         });
 
