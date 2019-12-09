@@ -6,11 +6,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.print.PrinterId;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -44,6 +46,17 @@ public class Course extends AppCompatActivity {
         LinearLayoutManager l = new LinearLayoutManager(this);
         vista.setLayoutManager(l);
         vista.setAdapter(adapter);
+
+
+        adapter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent oToNewActivity = new Intent(Course.this, OnActivities.class);
+                startActivity(oToNewActivity);
+            }
+        });
+
+
 
         //BOTON ACTUALIZAR Y ENVÍO LOS DATOS
         //DONT TOUCH
@@ -87,8 +100,6 @@ public class Course extends AppCompatActivity {
             }
         });
 
-
     }
-
 
 }
