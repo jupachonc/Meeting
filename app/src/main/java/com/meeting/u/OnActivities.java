@@ -19,6 +19,9 @@ public class OnActivities extends AppCompatActivity {
 
     public static String keyID;
     private TextView title;
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference activity = database.getReference("Activities/" + keyID );
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,16 +29,37 @@ public class OnActivities extends AppCompatActivity {
         setContentView(R.layout.activity_on_activities);
 
         title = findViewById(R.id.tittle_course);
+        updateActivity();
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference activities = database.getReference("Activities");
 
-        activities.addListenerForSingleValueEvent(new ValueEventListener() {
+        activity.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // El método verifica si hay un espacio disponile para la actividad y la añade
                 activity activity = dataSnapshot.child(keyID).getValue(activity.class);
-                title.setText(activity.getName());
+                //title.setText(activity.getName());
+
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w(TAG, "Failed to read value.", error.toException());
+
+            }
+        });
+    }
+
+    private void updateActivity(){
+
+
+        activity.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // El método verifica si hay un espacio disponile para la actividad y la añade
+                long available = dataSnapshot.child("availables").getValue(Long.class);
+                activity.child("availables").setValue(available-1);
 
 
             }
