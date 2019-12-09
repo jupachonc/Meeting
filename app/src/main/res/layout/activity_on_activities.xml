@@ -9,11 +9,12 @@
     tools:context=".OnActivities">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tittle_course"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="TEXTO TEXXTO TEXTO"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

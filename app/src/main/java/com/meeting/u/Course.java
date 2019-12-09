@@ -51,8 +51,11 @@ public class Course extends AppCompatActivity {
         adapter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent oToNewActivity = new Intent(Course.this, OnActivities.class);
-                startActivity(oToNewActivity);
+                String id = AdapterActivity.listActivitykeys.get(vista.getChildAdapterPosition(view));
+                OnActivities.keyID = id;
+                Intent goToOnActivity = new Intent(Course.this, OnActivities.class);
+                startActivity(goToOnActivity);
+                Toast.makeText(getBaseContext(), id, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -76,7 +79,7 @@ public class Course extends AppCompatActivity {
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 //Cuando añade datos a la base de datos, los actualiza en Recycler View (la vista del cliente)
                 activity m = dataSnapshot.getValue(activity.class);
-                adapter.addActivity(m, dataSnapshot.getKey().toString());
+                adapter.addActivity(m, dataSnapshot.getKey());
             }
 
             @Override

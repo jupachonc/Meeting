@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,7 +17,7 @@ public class AdapterActivity extends RecyclerView.Adapter<HolderActivity> implem
     @NonNull
     //>private List<DatosCourse> listActivity = new ArrayList<>();
     private List<activity> listActivity = new ArrayList<>();
-    private List<String> listActivitykeys = new ArrayList<>();//new
+    public static List<String> listActivitykeys = new ArrayList<>();//new
     private Context c;
     private View.OnClickListener listener;
 
@@ -47,7 +48,7 @@ public class AdapterActivity extends RecyclerView.Adapter<HolderActivity> implem
         holder.getHour().setText(listActivity.get(position).getHora_incio() + " - " + listActivity.get(position).getHora_fin());
         holder.getFree().setText(listActivity.get(position).getPlace());
         String activityType = listActivity.get(position).getTipo();
-        //holder.setActivityKey(listActivitykeys.get(position));
+        holder.setActivityKey(listActivitykeys.get(position));
         if (Objects.equals(activityType, "otra")) holder.getIcono().setImageResource(R.drawable.otra);
         else if (Objects.equals(activityType, "ocio")) holder.getIcono().setImageResource(R.drawable.ocio);
         else if (Objects.equals(activityType, "deportiva")) holder.getIcono().setImageResource(R.drawable.deportiva);
@@ -69,4 +70,5 @@ public class AdapterActivity extends RecyclerView.Adapter<HolderActivity> implem
             listener.onClick(view);
         }
     }
+
 }

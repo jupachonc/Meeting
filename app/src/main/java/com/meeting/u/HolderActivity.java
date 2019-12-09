@@ -15,6 +15,7 @@ public class HolderActivity extends RecyclerView.ViewHolder {
     private TextView free;
     private ImageView icono;
     public Button selection;
+    public String ActivityKey;
 
     public HolderActivity(@NonNull View itemView) {
         super(itemView);
@@ -57,5 +58,9 @@ public class HolderActivity extends RecyclerView.ViewHolder {
 
     public void setSelection(Button selection) {
         this.selection = selection;
+    }
+
+    public void setActivityKey(String ActivityKey){
+        this.ActivityKey = ActivityKey;
     }
 }
