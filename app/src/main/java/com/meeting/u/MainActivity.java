@@ -42,4 +42,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
     }
+
+    public void chat(){
+
+        Intent goToProfile = new Intent(this, Profile.class);
+        startActivity(goToProfile);
+
+    }
 }

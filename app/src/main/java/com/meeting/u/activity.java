@@ -79,8 +79,7 @@ public class activity {
             activities.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    // This method is called once with the initial value and again
-                    // whenever data at this location is updated.
+                    // El método verifica si hay un espacio disponile para la actividad y la añade
 
                     for(int i = 0; i < 5; i++) {
                         if(!dataSnapshot.child(String.valueOf(i)).exists()){

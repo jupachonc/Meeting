@@ -76,7 +76,7 @@ public class Course extends AppCompatActivity {
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 //Cuando añade datos a la base de datos, los actualiza en Recycler View (la vista del cliente)
                 activity m = dataSnapshot.getValue(activity.class);
-                adapter.addActivity(m);
+                adapter.addActivity(m, dataSnapshot.getKey().toString());
             }
 
             @Override

@@ -46,6 +46,7 @@ public class ChatActivityView extends AppCompatActivity {
     private ImageButton btnDown;
 
     public AdaptaMensaje adapter;
+    public static String chatidentifier;
 
     private FirebaseDatabase database;
     private DatabaseReference DBReference;
@@ -69,7 +70,7 @@ public class ChatActivityView extends AppCompatActivity {
 
         database = FirebaseDatabase.getInstance();
         DBReference = database.getReference("Chats");
-        databaseReference = DBReference.child("Proof");//Sala chat
+        databaseReference = DBReference.child(chatidentifier);//Sala chat
 
         storage = FirebaseStorage.getInstance();
 
