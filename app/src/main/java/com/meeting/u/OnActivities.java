@@ -110,7 +110,8 @@ public class OnActivities extends AppCompatActivity implements View.OnClickListe
     }
 
     public boolean onActivitiesCourse(){
-        final boolean[] verifier = {true};
+        final boolean[] verifier = new boolean[1];
+        verifier[0] = true;
         final String userid = LogInActivity.usuario.id;
         final int[] counter = {0};
         DatabaseReference databaseReference = database.getReference();
@@ -120,14 +121,13 @@ public class OnActivities extends AppCompatActivity implements View.OnClickListe
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 for(int i = 0; i < 5; i++){
-                    String c = dataSnapshot.child("Users" + userid + "/Activities" + i).getValue(String.class);
-                    if( c == keyID){
+                    if( dataSnapshot.child("Users/" + userid + "/Activities/" + i).getValue(String.class) == keyID){
                         verifier[0] = false;
                         toast(1);
 
                     }
 
-                    if(dataSnapshot.child("Users/" + userid + "/Activities" + i).exists()){
+                    if(dataSnapshot.child("Users/" + userid + "/Activities/" + i).exists()){
                         counter[0]++;}
                 }
 
