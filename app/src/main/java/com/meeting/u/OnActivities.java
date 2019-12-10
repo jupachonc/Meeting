@@ -3,6 +3,8 @@ package com.meeting.u;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -24,6 +26,7 @@ import static com.bumptech.glide.gifdecoder.GifHeaderParser.TAG;
 public class OnActivities extends AppCompatActivity implements View.OnClickListener {
 
     public static String keyID;
+    public static boolean validator;
     private TextView title;
     private TextView name_rep;
     private TextView hour_rep;
@@ -33,12 +36,17 @@ public class OnActivities extends AppCompatActivity implements View.OnClickListe
     private TextView aviable_rep;
     private Button join_rep;
     private Button openChat_rep;
+    private static boolean verifier;
+    private int counter;
     activity activity;
+    final Context context = getBaseContext();
+
 
 
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference activityRF = database.getReference("Activities/" + keyID );
+
 
 
     @Override
@@ -56,6 +64,15 @@ public class OnActivities extends AppCompatActivity implements View.OnClickListe
         join_rep = findViewById(R.id.join_rep);
         openChat_rep = findViewById(R.id.openChat_rep);
         join_rep.setOnClickListener(this);
+        openChat_rep.setOnClickListener(this);
+
+        if(validator){
+            join_rep.setVisibility(View.GONE);
+            openChat_rep.setVisibility(View.VISIBLE);
+        }else{
+            join_rep.setVisibility(View.VISIBLE);
+            openChat_rep.setVisibility(View.GONE);
+        }
 
 
 
@@ -85,7 +102,7 @@ public class OnActivities extends AppCompatActivity implements View.OnClickListe
                 else if (Objects.equals(activityTypeA, "academia")) image_rep.setImageResource(R.drawable.academia);
                 place_rep.setText(activity.getPlace());
                 description_rep.setText(activity.getDescripción());
-                aviable_rep.setText(String.valueOf(activity.getDisponibles()));
+                aviable_rep.setText(String.valueOf(activity.getDisponibles() + 1));
 
 
             }
@@ -105,48 +122,51 @@ public class OnActivities extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         int i = v.getId();
         if(i == R.id.join_rep){
-            if(onActivitiesCourse()){activity.toDB();}
+            verifier = true;
+            onActivitiesCourse();
+            if(verifier){activity.toDB();}
 
+        }else if(i == R.id.openChat_rep){
+            ChatActivityView.chatidentifier = keyID;
+
+            Intent goToChat = new Intent(this, ChatActivityView.class);
+            startActivity(goToChat);
         }
 
     }
 
-    public boolean onActivitiesCourse(){
-        final boolean[] verifier = new boolean[1];
-        verifier[0] = true;
+    public void onActivitiesCourse(){
         final String userid = LogInActivity.usuario.id;
-        final int[] counter = {0};
         DatabaseReference databaseReference = database.getReference();
 
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                boolean v = true;
 
                 for(int i = 0; i < 5; i++){
                     if( dataSnapshot.child("Users/" + userid + "/Activities/" + i).getValue(String.class) == keyID){
-                        verifier[0] = false;
+                        v = false;
                         toast(1);
 
                     }
 
                     if(dataSnapshot.child("Users/" + userid + "/Activities/" + i).exists()){
-                        counter[0]++;}
+                        vCounter();}
                 }
-
-
-
 
 
                 if(dataSnapshot.child("Activities/" + keyID + "/availables").getValue(Integer.class) < 1){
-                    verifier[0] = false;
+                    v =false;
                     toast(2);
                 }
 
-                if(counter[0] == 5){
-                    verifier[0] = false;
+                if(counter >= 5){
+                    v = false;
                     toast(3);
                 }
 
+                OnActivities.setVerifier(v);
 
             }
 
@@ -158,8 +178,6 @@ public class OnActivities extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-        return verifier[0];
-
     }
 
     public void toast(int i){
@@ -167,5 +185,18 @@ public class OnActivities extends AppCompatActivity implements View.OnClickListe
         else if(i == 2){Toast.makeText(getBaseContext(), "No hay cupos en esta actividad", Toast.LENGTH_SHORT).show();}
         else if(i == 3){Toast.makeText(getBaseContext(), "Ya estás en 5 actividades", Toast.LENGTH_SHORT).show();}
 
+    }
+
+    public void vMethod(boolean v){
+        if (v) verifier = true;
+        else verifier = false;
+    }
+
+    public void vCounter(){
+        counter++;
+    }
+
+    public static void setVerifier(boolean v) {
+        verifier = v;
     }
 }
