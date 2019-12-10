@@ -26,6 +26,7 @@ public class OnActivities extends AppCompatActivity implements View.OnClickListe
     public static String keyID;
     private TextView title;
     private TextView name_rep;
+    private TextView hour_rep;
     private ImageView image_rep;
     private TextView place_rep;
     private TextView description_rep;
@@ -47,6 +48,7 @@ public class OnActivities extends AppCompatActivity implements View.OnClickListe
         title = findViewById(R.id.tittle_course);
         name_rep = findViewById(R.id.name_rep);
         image_rep = findViewById(R.id.image_rep);
+        hour_rep = findViewById(R.id.hour_rep);
         place_rep = findViewById(R.id.place_rep);
         description_rep = findViewById(R.id.description_rep);
         aviable_rep = findViewById(R.id.aviable_rep);
@@ -73,6 +75,7 @@ public class OnActivities extends AppCompatActivity implements View.OnClickListe
 
                 title.setText(activity.getName());
                 name_rep.setText(activity.getName());
+                hour_rep.setText(activity.getHora_incio() + " - " + activity.getHora_fin());
                 String activityTypeA = activity.getTipo();
                 if (Objects.equals(activityTypeA, "otra")) image_rep.setImageResource(R.drawable.otra);
                 else if (Objects.equals(activityTypeA, "ocio")) image_rep.setImageResource(R.drawable.ocio);
