@@ -5,9 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -19,7 +21,7 @@ import java.util.Objects;
 
 import static com.bumptech.glide.gifdecoder.GifHeaderParser.TAG;
 
-public class OnActivities extends AppCompatActivity {
+public class OnActivities extends AppCompatActivity implements View.OnClickListener {
 
     public static String keyID;
     private TextView title;
@@ -29,11 +31,12 @@ public class OnActivities extends AppCompatActivity {
     private TextView description_rep;
     private TextView aviable_rep;
     private Button join_rep;
+    activity activity;
 
 
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference activity = database.getReference("Activities/" + keyID );
+    DatabaseReference activityRF = database.getReference("Activities/" + keyID );
 
 
     @Override
@@ -48,17 +51,26 @@ public class OnActivities extends AppCompatActivity {
         description_rep = findViewById(R.id.description_rep);
         aviable_rep = findViewById(R.id.aviable_rep);
         join_rep = findViewById(R.id.join_rep);
-        updateActivity();
+        join_rep.setOnClickListener(this);
 
 
-        activity.addListenerForSingleValueEvent(new ValueEventListener() {
+
+        activityRF.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(DataSnapshot dS) {
 
                 // El método verifica si hay un espacio disponile para la actividad y la añade
-                activity activity = dataSnapshot.child(keyID).getValue(activity.class);
+                activity = new activityjoin(keyID, dS.child("tipo").getValue().toString(),
+                        dS.child("name").getValue().toString(),
+                        dS.child("description").getValue().toString(),
+                        dS.child("place").getValue().toString(),
+                        dS.child("hora_incio").getValue().toString(),
+                        dS.child("hora_fin").getValue().toString(),
+                        dS.child("amount_participants").getValue(Integer.class),
+                        dS.child("availables").getValue(Integer.class),
+                        LogInActivity.usuario.name);
 
-                /*
+
                 title.setText(activity.getName());
                 name_rep.setText(activity.getName());
                 String activityTypeA = activity.getTipo();
@@ -68,9 +80,9 @@ public class OnActivities extends AppCompatActivity {
                 else if (Objects.equals(activityTypeA, "academia")) image_rep.setImageResource(R.drawable.academia);
                 place_rep.setText(activity.getPlace());
                 description_rep.setText(activity.getDescripción());
-                aviable_rep.setText(activity.getDisponibles());
+                aviable_rep.setText(String.valueOf(activity.getDisponibles()));
 
-                 */
+
             }
 
             @Override
@@ -82,15 +94,53 @@ public class OnActivities extends AppCompatActivity {
         });
     }
 
-    private void updateActivity(){
 
 
-        activity.addListenerForSingleValueEvent(new ValueEventListener() {
+    @Override
+    public void onClick(View v) {
+        int i = v.getId();
+        if(i == R.id.join_rep){
+            if(onActivitiesCourse()){activity.toDB();}
+
+        }
+
+    }
+
+    public boolean onActivitiesCourse(){
+        final boolean[] verifier = {true};
+        final String userid = LogInActivity.usuario.id;
+        final int[] counter = {0};
+        DatabaseReference databaseReference = database.getReference();
+
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                // El método verifica si hay un espacio disponile para la actividad y la añade
-                long available = dataSnapshot.child("availables").getValue(Long.class);
-                activity.child("availables").setValue(available-1);
+
+                for(int i = 0; i < 5; i++){
+                    String c = dataSnapshot.child("Users" + userid + "/Activities" + i).getValue(String.class);
+                    if( c == keyID){
+                        verifier[0] = false;
+                        toast(1);
+
+                    }
+
+                    if(dataSnapshot.child("Users/" + userid + "/Activities" + i).exists()){
+                        counter[0]++;}
+                }
+
+
+
+
+
+                if(dataSnapshot.child("Activities/" + keyID + "/availables").getValue(Integer.class) < 1){
+                    verifier[0] = false;
+                    toast(2);
+                }
+
+                if(counter[0] == 5){
+                    verifier[0] = false;
+                    toast(3);
+                }
 
 
             }
@@ -102,7 +152,15 @@ public class OnActivities extends AppCompatActivity {
 
             }
         });
+
+        return verifier[0];
+
     }
 
+    public void toast(int i){
+        if(i == 1){Toast.makeText(getBaseContext(), "Ya estás en esta actividad", Toast.LENGTH_SHORT).show();}
+        else if(i == 2){Toast.makeText(getBaseContext(), "No hay cupos en esta actividad", Toast.LENGTH_SHORT).show();}
+        else if(i == 3){Toast.makeText(getBaseContext(), "Ya estás en 5 actividades", Toast.LENGTH_SHORT).show();}
 
+    }
 }

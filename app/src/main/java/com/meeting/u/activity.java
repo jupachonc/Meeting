@@ -19,9 +19,9 @@ public class activity {
     private String place;
     private String hora_incio;
     private String hora_fin;
-    private int nparticipantes;
-    private int disponibles;
-    private String[] participantes;
+    int nparticipantes;
+    protected int disponibles;
+    String[] participantes;
 
 
     public FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -60,8 +60,8 @@ public class activity {
         activity.child("place").setValue(place);
         activity.child("hora_incio").setValue(hora_incio);
         activity.child("hora_fin").setValue(hora_fin);
-        activity.child("amount_participants").setValue(String.valueOf(nparticipantes));
-        activity.child("availables").setValue(String.valueOf(disponibles));
+        activity.child("amount_participants").setValue(nparticipantes);
+        activity.child("availables").setValue(disponibles);
 
         DatabaseReference actparticipantes = activity.child("participants");
 
