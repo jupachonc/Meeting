@@ -32,6 +32,7 @@ public class OnActivities extends AppCompatActivity implements View.OnClickListe
     private TextView description_rep;
     private TextView aviable_rep;
     private Button join_rep;
+    private Button openChat_rep;
     activity activity;
 
 
@@ -53,6 +54,7 @@ public class OnActivities extends AppCompatActivity implements View.OnClickListe
         description_rep = findViewById(R.id.description_rep);
         aviable_rep = findViewById(R.id.aviable_rep);
         join_rep = findViewById(R.id.join_rep);
+        openChat_rep = findViewById(R.id.openChat_rep);
         join_rep.setOnClickListener(this);
 
 
