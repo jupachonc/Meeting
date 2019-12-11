@@ -34,12 +34,11 @@ public class OnActivities extends AppCompatActivity implements View.OnClickListe
     private TextView place_rep;
     private TextView description_rep;
     private TextView aviable_rep;
-    private Button join_rep;
+    private Button delete_rep;
     private Button openChat_rep;
     private static boolean verifier;
     private int counter;
     activity activity;
-    final Context context = getBaseContext();
 
 
 
@@ -61,24 +60,22 @@ public class OnActivities extends AppCompatActivity implements View.OnClickListe
         place_rep = findViewById(R.id.place_rep);
         description_rep = findViewById(R.id.description_rep);
         aviable_rep = findViewById(R.id.aviable_rep);
-        join_rep = findViewById(R.id.join_rep);
+        delete_rep = findViewById(R.id.delete_rep);
         openChat_rep = findViewById(R.id.openChat_rep);
-        join_rep.setOnClickListener(this);
+        delete_rep.setOnClickListener(this);
         openChat_rep.setOnClickListener(this);
 
-        if(validator){
-            join_rep.setVisibility(View.GONE);
-            openChat_rep.setVisibility(View.VISIBLE);
-        }else{
-            join_rep.setVisibility(View.VISIBLE);
-            openChat_rep.setVisibility(View.GONE);
-        }
+
 
 
 
         activityRF.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dS) {
+
+                if(dS.child("participants/0").getValue(String.class).equals(LogInActivity.usuario.name)){
+                    delete_rep.setVisibility(View.VISIBLE);
+                }
 
                 // El método verifica si hay un espacio disponile para la actividad y la añade
                 activity = new activityjoin(keyID, dS.child("tipo").getValue().toString(),
@@ -121,7 +118,7 @@ public class OnActivities extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         int i = v.getId();
-        if(i == R.id.join_rep){
+        if(i == R.id.delete_rep){
             verifier = true;
             onActivitiesCourse();
             if(verifier){activity.toDB();}
