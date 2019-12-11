@@ -4,11 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
-    //public static user userm = LogInActivity.usuario;
+    public static user userm;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,14 +18,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.new_activity).setOnClickListener(this);
         findViewById(R.id.activities).setOnClickListener(this);
         findViewById(R.id.profile).setOnClickListener(this);
+        userm.getScore();
 
 
 
     }
-
-
-
-
 
     @Override
     public void onClick(View v) {

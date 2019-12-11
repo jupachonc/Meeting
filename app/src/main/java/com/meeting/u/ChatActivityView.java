@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -44,9 +45,11 @@ public class ChatActivityView extends AppCompatActivity {
     private ImageButton boton;
     private ImageButton btnFoto;
     private ImageButton btnDown;
+    private TextView title;
 
     public AdaptaMensaje adapter;
     public static String chatidentifier;
+    public static String titulo;
 
     private FirebaseDatabase database;
     private DatabaseReference DBReference;
@@ -67,6 +70,9 @@ public class ChatActivityView extends AppCompatActivity {
         boton = findViewById(R.id.boton);
         btnFoto = findViewById(R.id.btnFoto);
         btnDown = findViewById(R.id.btnDown);
+        title = findViewById(R.id.titulo_chat);
+
+        title.setText(titulo);
 
         database = FirebaseDatabase.getInstance();
         DBReference = database.getReference("Chats");
@@ -85,7 +91,7 @@ public class ChatActivityView extends AppCompatActivity {
         boton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
-                databaseReference.push().setValue(new Mensaje(dateFormat.format(date),LogInActivity.usuario.name,escribir.getText().toString(),"","1"));
+                databaseReference.push().setValue(new Mensaje(dateFormat.format(date),MainActivity.userm.name,escribir.getText().toString(),"","1"));
                 escribir.setText("");
             }
         });

@@ -193,6 +193,7 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
     private void updateUI(FirebaseUser user) {
         if (user != null) {
             usuario = new student(user.getDisplayName(), user.getEmail(), user.getUid());
+            MainActivity.userm = usuario;
             //usuario.getScore();
             Intent goToMain = new Intent(this, MainActivity.class);
             startActivity(goToMain);
@@ -228,6 +229,7 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
     protected void onDestroy() {
         super.onDestroy();
         signOut();
+        finish();
     }
 
     @Override

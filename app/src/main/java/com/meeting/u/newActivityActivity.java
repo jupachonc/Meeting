@@ -170,7 +170,7 @@ public class newActivityActivity extends AppCompatActivity implements View.OnCli
 
         activity activity = new activity(type, mName.getText().toString(), mDescription.getText().toString(), mPlace.getText().toString(),
                 mInicio.getText().toString(), mFinal.getText().toString(),
-                Integer.parseInt(mParticipantes.getText().toString()), LogInActivity.usuario.name);
+                Integer.parseInt(mParticipantes.getText().toString()), MainActivity.userm.name);
         activity.toDB();
     }
 

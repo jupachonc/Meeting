@@ -122,7 +122,7 @@ public class Course extends AppCompatActivity {
 
     public void inActivity(final String key){
 
-        DatabaseReference myRef = databaseA.getReference("Users/" + LogInActivity.usuario.id + "/Activities");
+        DatabaseReference myRef = databaseA.getReference("Users/" + MainActivity.userm.id + "/Activities");
         myRef.addValueEventListener(new ValueEventListener() {
 
             @Override

@@ -35,7 +35,7 @@ public class activityjoin extends activity {
 
 
         DatabaseReference usuarios = database.getReference("Users");
-        DatabaseReference user = usuarios.child(LogInActivity.usuario.id);
+        DatabaseReference user = usuarios.child(MainActivity.userm.id);
         final DatabaseReference activities = user.child("Activities");
 
         activity.addListenerForSingleValueEvent(new ValueEventListener() {

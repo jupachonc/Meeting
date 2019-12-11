@@ -73,7 +73,7 @@ public class OnActivities extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onDataChange(DataSnapshot dS) {
 
-                if(dS.child("participants/0").getValue(String.class).equals(LogInActivity.usuario.name)){
+                if(dS.child("participants/0").getValue(String.class).equals(MainActivity.userm.name)){
                     delete_rep.setVisibility(View.VISIBLE);
                 }
 
@@ -86,7 +86,7 @@ public class OnActivities extends AppCompatActivity implements View.OnClickListe
                         dS.child("hora_fin").getValue().toString(),
                         dS.child("amount_participants").getValue(Integer.class),
                         dS.child("availables").getValue(Integer.class),
-                        LogInActivity.usuario.name);
+                        MainActivity.userm.name);
 
 
                 title.setText(activity.getName());
@@ -119,12 +119,36 @@ public class OnActivities extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         int i = v.getId();
         if(i == R.id.delete_rep){
-            verifier = true;
-            onActivitiesCourse();
-            if(verifier){activity.toDB();}
+            activityRF.removeValue();
+            Intent goToMain = new Intent(this, MainActivity.class);
+            startActivity(goToMain);
+            final DatabaseReference activities = database.getReference("Users/" +
+                    MainActivity.userm.id + "/Actvities");
+            activities.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    // This method is called once with the initial value and again
+                    // whenever data at this location is updated.
+                   for(int i = 0; i < 5; i++){
+                       DataSnapshot dataSnapshot1 = dataSnapshot.child(String.valueOf(i));
+                       if(dataSnapshot1.exists() && dataSnapshot1.getValue(String.class).equals(keyID)) {
+                           OnActivities.vMethod(i);
+
+                       }
+                   }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError error) {
+                    // Failed to read value
+                    Log.w(TAG, "Failed to read value.", error.toException());
+                }
+            });
+            finish();
 
         }else if(i == R.id.openChat_rep){
             ChatActivityView.chatidentifier = keyID;
+            ChatActivityView.titulo = activity.getName();
 
             Intent goToChat = new Intent(this, ChatActivityView.class);
             startActivity(goToChat);
@@ -133,7 +157,7 @@ public class OnActivities extends AppCompatActivity implements View.OnClickListe
     }
 
     public void onActivitiesCourse(){
-        final String userid = LogInActivity.usuario.id;
+        final String userid = MainActivity.userm.id;
         DatabaseReference databaseReference = database.getReference();
 
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -184,9 +208,10 @@ public class OnActivities extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    public void vMethod(boolean v){
-        if (v) verifier = true;
-        else verifier = false;
+    public static void vMethod(int i){
+        FirebaseDatabase dt = FirebaseDatabase.getInstance();
+        DatabaseReference activities = dt.getReference("Users/" + MainActivity.userm.id + "/Activities");
+        activities.child(String.valueOf(i)).removeValue();
     }
 
     public void vCounter(){
