@@ -145,7 +145,7 @@
         android:layout_height="43dp"
         android:layout_marginEnd="16dp"
         android:ems="10"
-        android:hint="2-15"
+        android:hint="2-15 (incluyéndote)"
         android:inputType="number"
         android:textAlignment="center"
         android:textColor="@color/white"

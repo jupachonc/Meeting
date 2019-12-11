@@ -9,11 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".OnActivities"></activity>
+        <activity android:name=".RamdomActivity"></activity>
+        <activity android:name=".OnActivities" />
         <activity android:name=".newActivityActivity" />
         <activity android:name=".Profile" />
         <activity android:name=".ChatActivityView" />
-        <activity android:name=".Course"/>
+        <activity android:name=".Course" />
         <activity android:name=".LogInActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
