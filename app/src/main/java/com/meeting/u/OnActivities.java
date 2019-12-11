@@ -122,7 +122,7 @@ public class OnActivities extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         int i = v.getId();
         if(i == R.id.join_rep){
-            verifier = true;
+            //verifier = verifica();
             onActivitiesCourse();
             if(verifier){activity.toDB();}
 
@@ -143,31 +143,35 @@ public class OnActivities extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 boolean v = true;
-
+                String took = "yes";
                 for(int i = 0; i < 5; i++){
                     if( dataSnapshot.child("Users/" + userid + "/Activities/" + i).getValue(String.class) == keyID){
                         v = false;
                         toast(1);
-
+                        took = "no";
                     }
 
                     if(dataSnapshot.child("Users/" + userid + "/Activities/" + i).exists()){
-                        vCounter();}
+                        //vCounter();
+                        counter++;
+                        v = true;
+                        //toast(4);
+                    }
                 }
 
 
-                if(dataSnapshot.child("Activities/" + keyID + "/availables").getValue(Integer.class) < 1){
-                    v =false;
+                if((dataSnapshot.child("Activities/" + keyID + "/availables").getValue(Integer.class) < 1) && (took.equals("yes"))) {
+                    v = false;
                     toast(2);
-                }
-
-                if(counter >= 5){
+                } else if(counter > 0){
                     v = false;
                     toast(3);
                 }
 
-                OnActivities.setVerifier(v);
-
+                //OnActivities.setVerifier(v);
+                verifier = v;
+                //if (verifier) toast(5);
+                //else toast(6);
             }
 
             @Override
@@ -183,7 +187,10 @@ public class OnActivities extends AppCompatActivity implements View.OnClickListe
     public void toast(int i){
         if(i == 1){Toast.makeText(getBaseContext(), "Ya estás en esta actividad", Toast.LENGTH_SHORT).show();}
         else if(i == 2){Toast.makeText(getBaseContext(), "No hay cupos en esta actividad", Toast.LENGTH_SHORT).show();}
-        else if(i == 3){Toast.makeText(getBaseContext(), "Ya estás en 5 actividades", Toast.LENGTH_SHORT).show();}
+        else if(i == 3){Toast.makeText(getBaseContext(), "Ya estás en 1 actividad", Toast.LENGTH_SHORT).show();}
+        else if(i == 4){Toast.makeText(getBaseContext(), "Te has registrado correctamente", Toast.LENGTH_SHORT).show();}
+        else if(i == 5){Toast.makeText(getBaseContext(), "verdad", Toast.LENGTH_SHORT).show();}
+        else if(i == 6){Toast.makeText(getBaseContext(), "falso", Toast.LENGTH_SHORT).show();}
 
     }
 
@@ -195,8 +202,15 @@ public class OnActivities extends AppCompatActivity implements View.OnClickListe
     public void vCounter(){
         counter++;
     }
-
+/*
     public static void setVerifier(boolean v) {
         verifier = v;
     }
+
+    public boolean verifica(){
+        verifier = v;
+        return verifier;
+    }
+
+ */
 }

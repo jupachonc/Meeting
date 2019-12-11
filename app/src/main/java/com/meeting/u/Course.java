@@ -43,7 +43,7 @@ public class Course extends AppCompatActivity {
         setContentView(R.layout.activity_course);
 
         vista = findViewById(R.id.vista);
-        isOn = false;
+        isOn = true;
 
         databaseA = FirebaseDatabase.getInstance();
         databaseReferenceA = databaseA.getReference("Activities");//Activity name HAY QUE RECIBIR ESTO DE LOS DATOS QUE HAYA INGRESADO EL USUARIO
